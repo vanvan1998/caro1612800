@@ -13,3 +13,9 @@ export const login = 'LOGIN';
 export const logOut = 'LOGOUT';
 
 export const info = 'INFO';
+
+export const playGame = 'PLAYGAME';
+
+export const noPlayGame = 'NOPLAYGAME';
+
+export const noInfo = 'NOINFO';

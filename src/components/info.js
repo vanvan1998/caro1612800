@@ -2,7 +2,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import InfoSharpIcon from '@material-ui/icons/InfoSharp';
@@ -29,9 +28,13 @@ export default class Info extends React.PureComponent {
     this.email = st.email;
     this.dateOfBirth = st.dateOfBirth;
     this.sex = st.sex;
-    console.log(st);
     if (!st.isLogin) {
-      return <Redirect to="/login" />;
+      return <Redirect to="/" />;
+    }
+    if (st.isGame) {
+      st.NoPlayGame();
+      st.NoInfo();
+      return <Redirect to="/game" />;
     }
     return (
       <div className="loginLayout">
@@ -151,9 +154,16 @@ export default class Info extends React.PureComponent {
               </div>
               <Grid container justify="flex-end">
                 <Grid item>
-                  <Link href="/" variant="body2">
+                  <Button
+                    type="button"
+                    onClick={event => {
+                      event.preventDefault();
+                      st.Login(st.username, st.password);
+                      st.IsGame();
+                    }}
+                  >
                     Play game
-                  </Link>
+                  </Button>
                 </Grid>
               </Grid>
             </form>

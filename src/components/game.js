@@ -8,10 +8,10 @@ class Game extends React.Component {
   render() {
     const st = this.props;
     if (st.token === 'err') {
-      return <Redirect to="/login" />;
+      return <Redirect to="/" />;
     }
     if (st.token === '') {
-      return <Redirect to="/login" />;
+      return <Redirect to="/" />;
     }
     if (st.isInfo) {
       return <Redirect to="/info" />;

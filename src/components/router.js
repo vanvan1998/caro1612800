@@ -10,17 +10,17 @@ export default function App() {
     <Router>
       <div>
         <Switch>
-          <Route path="/login">
-            <LoginContainer />
-          </Route>
           <Route path="/info">
             <InfoContainer />
           </Route>
           <Route path="/register">
             <RegisterContainer />
           </Route>
-          <Route path="/">
+          <Route path="/game">
             <GameContainer />
+          </Route>
+          <Route path="/">
+            <LoginContainer />
           </Route>
         </Switch>
       </div>

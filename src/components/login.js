@@ -23,7 +23,7 @@ export default class SignIn extends React.Component {
   render() {
     const st = this.props;
     if (st.isLogin) {
-      return <Redirect to="/" />;
+      return <Redirect to="/game" />;
     }
     if (st.token === 'err') {
       this.err = 'Username hoặc mật khẩu không đúng!!!';
@@ -95,7 +95,7 @@ export default class SignIn extends React.Component {
                 </Grid>
                 <Grid item>
                   <Link href="/register" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                    Do not have an account? Sign Up
                   </Link>
                 </Grid>
               </Grid>

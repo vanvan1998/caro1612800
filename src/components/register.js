@@ -25,7 +25,7 @@ export default class SignUp extends React.PureComponent {
   render() {
     const st = this.props;
     if (st.isRegister) {
-      return <Redirect to="/login" />;
+      return <Redirect to="/" />;
     }
     if (st.CheckLoadRegister) {
       this.err = 'Có lỗi xảy ra, vui lòng thử lại!!!';
@@ -150,7 +150,7 @@ export default class SignUp extends React.PureComponent {
               </div>
               <Grid container justify="flex-end">
                 <Grid item>
-                  <Link href="/login" variant="body2">
+                  <Link href="/" variant="body2">
                     Already have an account? Sign in
                   </Link>
                 </Grid>

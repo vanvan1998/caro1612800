@@ -122,3 +122,21 @@ export const Info = () => {
     type: types.info
   };
 };
+
+export const PlayGame = () => {
+  return {
+    type: types.playGame
+  };
+};
+
+export const NoPlayGame = () => {
+  return {
+    type: types.noPlayGame
+  };
+};
+
+export const NoInfo = () => {
+  return {
+    type: types.noInfo
+  };
+};

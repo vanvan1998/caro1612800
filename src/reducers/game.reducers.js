@@ -220,6 +220,11 @@ const GameReducer = (state = initialState, action) => {
       st.isInfo = true;
       return st;
     }
+    case types.noInfo: {
+      const st = { ...state };
+      st.isInfo = false;
+      return st;
+    }
     default:
       return state;
   }
