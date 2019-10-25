@@ -1,0 +1,126 @@
+body {
+  font: 14px 'Century Gothic', Futura, sans-serif;
+  margin: 20px;
+}
+
+ol,
+ul {
+  padding-left: 30px;
+}
+
+.buttonRed {
+  color: red;
+}
+
+.divRow {
+  display: block;
+  margin-top: -4px;
+}
+
+.board-row:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+div {
+  display: inline-block;
+}
+.status {
+  margin-bottom: 10px;
+}
+
+.square {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+}
+
+.Icon{
+  color: rgb(248, 48, 75);
+}
+
+.square:focus {
+  outline: none;
+}
+
+.kbd-navigation .square:focus {
+  background: #ddd;
+}
+
+.buttonSort {
+  margin-left: 23px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+  margin-left: 150px;
+  margin-top: 35px;
+}
+
+.game-info {
+  margin-left: 120px;
+}
+
+.loginLayout {
+  margin-left: 550px;
+}
+
+.paper {
+  margin-top: 70px;
+  display: 'flex';
+  flex-direction: 'column';
+  align-items: 'center';
+}
+.avatar {
+  margin: 10px 0px 10px 0px;
+}
+
+.form {
+  width: '100%';
+  margin-top: 10px;
+}
+.Remember {
+  margin: 5px 0px 5px;
+}
+
+.footer-login {
+  margin-top: 20px;
+}
+
+.Error {
+  color: red;
+  margin: 0px 100px 40px 0px;
+}
+
+.GridForm {
+  width: 500px;
+  height: 40px;
+  margin: 30px 0px 30px 0px;
+}
+
+.Username{
+  font-size: 30px;
+}
+
+.buttonUser{
+  height: 50px;
+  width: 50px;
+}
+
+.ErrorRegister{
+  color: red;
+  margin: 20px 20px 0px 10px;
+}
