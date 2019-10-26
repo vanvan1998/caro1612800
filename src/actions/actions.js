@@ -140,3 +140,76 @@ export const NoInfo = () => {
     type: types.noInfo
   };
 };
+
+function OnclickUpdateUser(
+  id,
+  username,
+  name,
+  email,
+  dateOfBirth,
+  sex,
+  password
+) {
+  const res = axios
+    .post('https://restful1612800.herokuapp.com/users/updateUser', {
+      id,
+      username,
+      name,
+      email,
+      dateOfBirth,
+      sex,
+      password
+    })
+    .catch(error => {
+      return error;
+    });
+  return res;
+}
+
+export const UpdateUser = (
+  id,
+  username,
+  name,
+  email,
+  dateOfBirth,
+  sex,
+  password,
+  res
+) => {
+  return {
+    type: types.updateUser,
+    data: { id, username, name, email, dateOfBirth, sex, password, res }
+  };
+};
+
+export const UpdateUserRequest = (
+  id,
+  username,
+  name,
+  email,
+  dateOfBirth,
+  sex,
+  password
+) => {
+  return dispatch => {
+    return OnclickUpdateUser(
+      id,
+      username,
+      name,
+      email,
+      dateOfBirth,
+      sex,
+      password
+    ).then(res => {
+      dispatch(
+        UpdateUser(id, username, name, email, dateOfBirth, sex, password, res)
+      );
+    });
+  };
+};
+
+export const NoUpdateUser = () => {
+  return {
+    type: types.noUpdateUser
+  };
+};

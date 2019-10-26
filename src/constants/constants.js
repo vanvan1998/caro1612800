@@ -19,3 +19,7 @@ export const playGame = 'PLAYGAME';
 export const noPlayGame = 'NOPLAYGAME';
 
 export const noInfo = 'NOINFO';
+
+export const noUpdateUser = 'NOUPDATEUSER';
+
+export const updateUser = 'UPDATEUSER';

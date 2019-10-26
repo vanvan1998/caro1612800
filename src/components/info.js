@@ -31,6 +31,14 @@ export default class Info extends React.PureComponent {
     if (!st.isLogin) {
       return <Redirect to="/" />;
     }
+    if (st.isUpdate === 'false') {
+      st.NoUpdateUser();
+      this.err = 'Cập nhật thất bại, vui lòng thử lại!!!';
+    }
+    if (st.isUpdate === 'true') {
+      st.NoUpdateUser();
+      this.err = 'Cập nhật thành công!!!';
+    }
     if (st.isGame) {
       st.NoPlayGame();
       st.NoInfo();
@@ -60,7 +68,7 @@ export default class Info extends React.PureComponent {
                       this.name = event.target.value;
                     }}
                     label="Full Name"
-                    value={this.name}
+                    defaultValue={this.name}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -73,7 +81,7 @@ export default class Info extends React.PureComponent {
                       this.dateOfBirth = event.target.value;
                     }}
                     name="DateOfBirth"
-                    value={this.dateOfBirth}
+                    defaultValue={this.dateOfBirth}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -86,7 +94,7 @@ export default class Info extends React.PureComponent {
                       this.sex = event.target.value;
                     }}
                     name="sex"
-                    value={this.sex}
+                    defaultValue={this.sex}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -100,7 +108,7 @@ export default class Info extends React.PureComponent {
                     }}
                     label="Username"
                     name="username"
-                    value={this.username}
+                    defaultValue={this.username}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -113,7 +121,7 @@ export default class Info extends React.PureComponent {
                     }}
                     label="Email Address"
                     name="email"
-                    value={this.email}
+                    defaultValue={this.email}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -137,7 +145,8 @@ export default class Info extends React.PureComponent {
                   fullWidth
                   onClick={event => {
                     event.preventDefault();
-                    st.Register(
+                    st.UpdateUser(
+                      st.id,
                       this.username,
                       this.name,
                       this.email,

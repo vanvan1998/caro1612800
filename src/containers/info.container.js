@@ -12,7 +12,9 @@ const mapStateToProps = state => {
     sex: InfoState.sex,
     isLogin: InfoState.isLogin,
     password: InfoState.password,
-    isGame: state.InFoReducer.isGame
+    id: InfoState.id,
+    isGame: state.InFoReducer.isGame,
+    isUpdate: InfoState.isUpdate
   };
 };
 
@@ -29,6 +31,22 @@ const mapDispatchToProps = dispatch => {
     },
     NoInfo: () => {
       dispatch(actions.NoInfo());
+    },
+    NoUpdateUser: () => {
+      dispatch(actions.NoUpdateUser());
+    },
+    UpdateUser: (id, username, name, email, dateOfBirth, sex, password) => {
+      dispatch(
+        actions.UpdateUserRequest(
+          id,
+          username,
+          name,
+          email,
+          dateOfBirth,
+          sex,
+          password
+        )
+      );
     }
   };
 };
