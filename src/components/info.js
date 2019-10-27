@@ -103,12 +103,9 @@ export default class Info extends React.PureComponent {
                     required
                     fullWidth
                     id="username"
-                    onChange={event => {
-                      this.username = event.target.value;
-                    }}
                     label="Username"
                     name="username"
-                    defaultValue={this.username}
+                    value={this.username}
                   />
                 </Grid>
                 <Grid item xs={12}>

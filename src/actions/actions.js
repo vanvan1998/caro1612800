@@ -31,7 +31,7 @@ export const sortClick = () => {
 
 function OnclickLogin(username, password) {
   const res = axios
-    .post('https://restful1612800.herokuapp.com/users/login', {
+    .post('http://localhost:3000/api/login', {
       username,
       password
     })
@@ -56,15 +56,24 @@ export const loginRequest = (username, password) => {
   };
 };
 
-function OnclickRegister(username, name, email, dateOfBirth, sex, password) {
+function OnclickRegister(
+  username,
+  name,
+  email,
+  dateOfBirth,
+  sex,
+  password,
+  confirmPassword
+) {
   const res = axios
-    .post('https://restful1612800.herokuapp.com/users/register', {
+    .post('http://localhost:3000/api/register', {
       username,
       name,
       email,
       dateOfBirth,
       sex,
-      password
+      password,
+      confirmPassword
     })
     .catch(error => {
       return error;
@@ -79,11 +88,21 @@ export const register = (
   dateOfBirth,
   sex,
   password,
+  confirmPassword,
   res
 ) => {
   return {
     type: types.register,
-    data: { username, name, email, dateOfBirth, sex, password, res }
+    data: {
+      username,
+      name,
+      email,
+      dateOfBirth,
+      sex,
+      password,
+      confirmPassword,
+      res
+    }
   };
 };
 
@@ -93,7 +112,8 @@ export const registerRequest = (
   email,
   dateOfBirth,
   sex,
-  password
+  password,
+  confirmPassword
 ) => {
   return dispatch => {
     return OnclickRegister(
@@ -102,10 +122,20 @@ export const registerRequest = (
       email,
       dateOfBirth,
       sex,
-      password
+      password,
+      confirmPassword
     ).then(res => {
       dispatch(
-        register(username, name, email, dateOfBirth, sex, password, res)
+        register(
+          username,
+          name,
+          email,
+          dateOfBirth,
+          sex,
+          password,
+          confirmPassword,
+          res
+        )
       );
     });
   };
@@ -151,8 +181,8 @@ function OnclickUpdateUser(
   password
 ) {
   const res = axios
-    .post('https://restful1612800.herokuapp.com/users/updateUser', {
-      id,
+    .post('http://localhost:3000/api/users/update', {
+      _id: id,
       username,
       name,
       email,
@@ -211,5 +241,31 @@ export const UpdateUserRequest = (
 export const NoUpdateUser = () => {
   return {
     type: types.noUpdateUser
+  };
+};
+
+function OnclickGetUser(token) {
+  const res = axios
+    .get('https://restful1612800.herokuapp.com/me', {
+      headers: { 'Authorization:': `Bearer ${token}` }
+    })
+    .catch(error => {
+      return error;
+    });
+  return res;
+}
+
+export const GetUser = (token, res) => {
+  return {
+    type: types.getUser,
+    data: { token, res }
+  };
+};
+
+export const GetRequest = token => {
+  return dispatch => {
+    return OnclickGetUser(token).then(res => {
+      dispatch(GetUser(token, res));
+    });
   };
 };

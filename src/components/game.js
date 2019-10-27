@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.css';
 import { Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
 import Board from './board';
 
 class Game extends React.Component {
@@ -52,63 +53,71 @@ class Game extends React.Component {
     } else {
       status = `Next step: ${st.xIsNext ? 'X' : 'O'}`;
     }
+    // giao diện
     return (
       <div className="game">
-        <div className="game-board">
-          <Board
-            squares={current.squares}
-            color={(i, j) => {
-              if (winner) {
-                for (let m = 0; m < 9; m += 2) {
-                  if (i === st.temp[m] && j === st.temp[m + 1]) {
-                    return 'red';
+        <Card>
+          <div className="game-board">
+            <Board
+              squares={current.squares}
+              color={(i, j) => {
+                if (winner) {
+                  for (let m = 0; m < 9; m += 2) {
+                    if (i === st.temp[m] && j === st.temp[m + 1]) {
+                      return 'red';
+                    }
                   }
                 }
-              }
-              return 'black';
-            }}
-            onClick={(i, j) => st.handleClick(i, j)}
-          />
-        </div>
-        <div className="game-info">
-          <div className="Username">
-            Người chơi :{' '}
-            <Button
-              type="button"
-              onClick={event => {
-                event.preventDefault();
-                st.Login(st.username, st.password);
-                st.Info();
+                return 'black';
               }}
-            >
-              <h3>{st.name}</h3>
-            </Button>
+              onClick={(i, j) => st.handleClick(i, j)}
+            />
           </div>
-          <br />
+        </Card>
+        <Card
+          className="game-info"
+          style={{ boxShadow: '3px 3px 5px 5px rgb(133, 131, 131)' }}
+        >
           <div>
-            <h4>{status}</h4>
-          </div>
-          <br />
-          <center>
-            <Button
-              variant="contained"
-              color="primary"
+            <div className="Username">
+              Người chơi :{' '}
+              <Button
+                type="button"
+                onClick={event => {
+                  event.preventDefault();
+                  st.Login(st.username, st.password);
+                  st.Info();
+                }}
+              >
+                <h3>{st.name}</h3>
+              </Button>
+            </div>
+            <br />
+            <div>
+              <h4>{status}</h4>
+            </div>
+            <br />
+            <center>
+              <Button
+                variant="contained"
+                color="primary"
+                type="button"
+                onClick={() => st.Logout()}
+              >
+                Đăng xuất
+              </Button>
+            </center>
+            <br />
+            <button
               type="button"
-              onClick={() => st.Logout()}
+              className="buttonSort"
+              onClick={() => st.sortClick()}
             >
-              Đăng xuất
-            </Button>
-          </center>
-          <br />
-          <button
-            type="button"
-            className="buttonSort"
-            onClick={() => st.sortClick()}
-          >
-            {Sortvalue}
-          </button>
-          <ol>{moves}</ol>
-        </div>
+              {Sortvalue}
+            </button>
+            <ol>{moves}</ol>
+          </div>
+        </Card>
       </div>
     );
   }

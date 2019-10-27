@@ -19,6 +19,7 @@ export default class SignUp extends React.PureComponent {
     this.dateOfBirth = '';
     this.sex = '';
     this.password = '';
+    this.confirmPassword = '';
     this.err = '';
   }
 
@@ -28,7 +29,7 @@ export default class SignUp extends React.PureComponent {
       return <Redirect to="/" />;
     }
     if (st.CheckLoadRegister) {
-      this.err = 'Có lỗi xảy ra, vui lòng thử lại!!!';
+      this.err = st.err;
     }
     return (
       <div className="loginLayout">
@@ -126,6 +127,20 @@ export default class SignUp extends React.PureComponent {
                     autoComplete="current-password"
                   />
                 </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    onChange={event => {
+                      this.confirmPassword = event.target.value;
+                    }}
+                    name="confirmPassword"
+                    label="confirmPassword"
+                    type="password"
+                    id="confirmPassword"
+                  />
+                </Grid>
               </Grid>
               <div className="ErrorRegister">{this.err}</div>
               <div className="GridForm">
@@ -139,7 +154,8 @@ export default class SignUp extends React.PureComponent {
                       this.email,
                       this.dateOfBirth,
                       this.sex,
-                      this.password
+                      this.password,
+                      this.confirmPassword
                     );
                   }}
                   variant="contained"

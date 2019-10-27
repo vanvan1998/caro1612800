@@ -8,13 +8,22 @@ const mapStateToProps = state => {
     username: RegisterState.username,
     password: RegisterState.password,
     isRegister: RegisterState.isRegister,
-    CheckLoadRegister: RegisterState.CheckLoadRegister
+    CheckLoadRegister: RegisterState.CheckLoadRegister,
+    err: RegisterState.err
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    Register: (username, name, email, dateOfBirth, sex, password) => {
+    Register: (
+      username,
+      name,
+      email,
+      dateOfBirth,
+      sex,
+      password,
+      confirmPassword
+    ) => {
       dispatch(
         actions.registerRequest(
           username,
@@ -22,7 +31,8 @@ const mapDispatchToProps = dispatch => {
           email,
           dateOfBirth,
           sex,
-          password
+          password,
+          confirmPassword
         )
       );
     }

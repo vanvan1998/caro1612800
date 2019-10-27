@@ -4,7 +4,8 @@ const initialState = {
   username: '',
   password: '',
   isRegister: false,
-  CheckLoadRegister: false
+  CheckLoadRegister: false,
+  err: ''
 };
 
 const RegisterReducer = (state = initialState, action) => {
@@ -13,10 +14,13 @@ const RegisterReducer = (state = initialState, action) => {
       const st = { ...state };
       st.username = action.data.username;
       st.password = action.data.password;
-      try {
-        st.name = action.data.res.data.name;
+      // console.log('status', action.data.res.status.message); im coi boos theer hieenj
+      st.name = action.data.res.response.data.name;
+      if (st.name === null) {
         st.isRegister = true;
-      } catch (err) {
+      } else {
+        console.log('data', action.data.res.response.data);
+        st.err = action.data.res.response.data.message;
         st.CheckLoadRegister = true;
       }
       return st;

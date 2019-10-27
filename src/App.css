@@ -30,6 +30,10 @@ div {
   margin-bottom: 10px;
 }
 
+.game-board{
+  margin: 11px 5px 5px 5px;
+}
+
 .square {
   background: #fff;
   border: 1px solid #999;
@@ -66,12 +70,16 @@ div {
 .game {
   display: flex;
   flex-direction: row;
-  margin-left: 150px;
-  margin-top: 35px;
+  margin-left: 100px;
+  margin-top: -10px;
 }
 
 .game-info {
+  height: 660px;
   margin-left: 120px;
+  background: rgb(235, 130, 130);
+  display: 'inline-block';
+  box-shadow: 10px 10px 10px 10px rgb(133, 131, 131);
 }
 
 .loginLayout {
