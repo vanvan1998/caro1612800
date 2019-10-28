@@ -1,3 +1,4 @@
+import cookie from 'react-cookies';
 import * as types from '../constants/constants';
 
 const initialState = {
@@ -22,21 +23,46 @@ const LoginReducer = (state = initialState, action) => {
       try {
         st.token = action.data.res.data.token;
         st.name = action.data.res.data.userModified.name;
+        const expires = new Date();
+        expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
+        // cookie.save('userId', st.token, { path: '/' });
+        cookie.save('userId', st.token, {
+          path: '/',
+          expires
+        });
         st.email = action.data.res.data.userModified.email;
         st.dateOfBirth = action.data.res.data.userModified.dateOfBirth;
         st.sex = action.data.res.data.userModified.sex;
         // eslint-disable-next-line no-underscore-dangle
         st.id = action.data.res.data.userModified._id;
         st.isLogin = true;
-        localStorage.setItem('user', st.token);
       } catch (err) {
         st.token = 'err';
       }
       return st;
     }
     case types.getUser: {
-      // todo
       const st = { ...state };
+      try {
+        st.token = action.data.token;
+        st.username = action.data.res.data.username;
+        st.name = action.data.res.data.name;
+        const expires = new Date();
+        expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
+        // cookie.save('userId', st.token, { path: '/' });
+        cookie.save('userId', st.token, {
+          path: '/',
+          expires
+        });
+        st.email = action.data.res.data.email;
+        st.dateOfBirth = action.data.res.data.dateOfBirth;
+        st.sex = action.data.res.data.sex;
+        // eslint-disable-next-line no-underscore-dangle
+        st.id = action.data.res.data._id;
+        st.isLogin = true;
+      } catch (err) {
+        st.token = 'err';
+      }
       return st;
     }
     case types.logOut: {
@@ -48,19 +74,20 @@ const LoginReducer = (state = initialState, action) => {
       st.password = '';
       st.dateOfBirth = '';
       st.sex = '';
+      cookie.remove('userId', { path: '/' });
       return st;
     }
     case types.updateUser: {
       const st = { ...state };
       st.username = action.data.username;
       st.password = action.data.password;
+      st.email = action.data.email;
+      st.dateOfBirth = action.data.dateOfBirth;
+      st.sex = action.data.sex;
       try {
-        const temp = action.data.res.data.success;
-        if (temp === 'success') {
-          st.isUpdate = 'true';
-        }
+        st.isUpdate = action.data.res.data.message;
       } catch (err) {
-        st.isUpdate = 'false';
+        st.isUpdate = action.data.res.response.data.message;
       }
       return st;
     }

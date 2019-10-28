@@ -14,15 +14,13 @@ const mapStateToProps = state => {
     password: InfoState.password,
     id: InfoState.id,
     isGame: state.InFoReducer.isGame,
-    isUpdate: InfoState.isUpdate
+    isUpdate: InfoState.isUpdate,
+    token: InfoState.token
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    Login: (username, password) => {
-      dispatch(actions.loginRequest(username, password));
-    },
     IsGame: () => {
       dispatch(actions.PlayGame());
     },
@@ -35,7 +33,19 @@ const mapDispatchToProps = dispatch => {
     NoUpdateUser: () => {
       dispatch(actions.NoUpdateUser());
     },
-    UpdateUser: (id, username, name, email, dateOfBirth, sex, password) => {
+    GetUserRequest: token => {
+      dispatch(actions.GetUserRequest(token));
+    },
+    UpdateUser: (
+      id,
+      username,
+      name,
+      email,
+      dateOfBirth,
+      sex,
+      password,
+      conformPassword
+    ) => {
       dispatch(
         actions.UpdateUserRequest(
           id,
@@ -44,7 +54,8 @@ const mapDispatchToProps = dispatch => {
           email,
           dateOfBirth,
           sex,
-          password
+          password,
+          conformPassword
         )
       );
     }

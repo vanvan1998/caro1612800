@@ -24,6 +24,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    GetUserRequest: token => {
+      dispatch(actions.GetUserRequest(token));
+    },
     handleClick: (i, j) => {
       dispatch(actions.boardClick(i, j));
     },

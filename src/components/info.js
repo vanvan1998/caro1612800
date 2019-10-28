@@ -18,6 +18,7 @@ export default class Info extends React.PureComponent {
     this.dateOfBirth = '';
     this.sex = '';
     this.password = '';
+    this.confirmPassword = '';
     this.err = '';
   }
 
@@ -31,13 +32,9 @@ export default class Info extends React.PureComponent {
     if (!st.isLogin) {
       return <Redirect to="/" />;
     }
-    if (st.isUpdate === 'false') {
+    if (st.isUpdate !== '') {
       st.NoUpdateUser();
-      this.err = 'Cập nhật thất bại, vui lòng thử lại!!!';
-    }
-    if (st.isUpdate === 'true') {
-      st.NoUpdateUser();
-      this.err = 'Cập nhật thành công!!!';
+      this.err = st.isUpdate;
     }
     if (st.isGame) {
       st.NoPlayGame();
@@ -45,7 +42,7 @@ export default class Info extends React.PureComponent {
       return <Redirect to="/game" />;
     }
     return (
-      <div className="loginLayout">
+      <div className="InfoLayout">
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <div className="paper">
@@ -135,11 +132,26 @@ export default class Info extends React.PureComponent {
                     id="password"
                   />
                 </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    onChange={event => {
+                      this.confirmPassword = event.target.value;
+                    }}
+                    name="confirmPassword"
+                    label="Conform Password"
+                    type="password"
+                    id="confirmPassword"
+                  />
+                </Grid>
               </Grid>
               <div className="ErrorRegister">{this.err}</div>
               <div className="GridForm">
                 <Button
                   fullWidth
+                  style={{ margin: '10px 0px 0px 0px' }}
                   onClick={event => {
                     event.preventDefault();
                     st.UpdateUser(
@@ -149,7 +161,8 @@ export default class Info extends React.PureComponent {
                       this.email,
                       this.dateOfBirth,
                       this.sex,
-                      this.password
+                      this.password,
+                      this.confirmPassword
                     );
                   }}
                   variant="contained"
@@ -162,9 +175,11 @@ export default class Info extends React.PureComponent {
                 <Grid item>
                   <Button
                     type="button"
+                    style={{ margin: '-30px 0px 0px 0px', color: 'blue' }}
                     onClick={event => {
                       event.preventDefault();
-                      st.Login(st.username, st.password);
+                      // st.Login(st.username, st.password);
+                      st.GetUserRequest(st.token);
                       st.IsGame();
                     }}
                   >

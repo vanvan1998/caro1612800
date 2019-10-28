@@ -14,12 +14,10 @@ const RegisterReducer = (state = initialState, action) => {
       const st = { ...state };
       st.username = action.data.username;
       st.password = action.data.password;
-      // console.log('status', action.data.res.status.message); im coi boos theer hieenj
-      st.name = action.data.res.response.data.name;
-      if (st.name === null) {
+      try {
+        st.name = action.data.res.data.name;
         st.isRegister = true;
-      } else {
-        console.log('data', action.data.res.response.data);
+      } catch (err) {
         st.err = action.data.res.response.data.message;
         st.CheckLoadRegister = true;
       }

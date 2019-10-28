@@ -30,17 +30,25 @@ class Game extends React.Component {
         : 'Go to game start';
       return (
         <li key={move}>
-          <button
+          <Button
             type="button"
             style={
               st.stepNumber === move
-                ? { fontWeight: 'bold' }
-                : { fontWeight: 'normal' }
+                ? {
+                    fontWeight: 'bold',
+                    background: 'rgba(221, 221, 221, 0.4)',
+                    margin: '2px'
+                  }
+                : {
+                    fontWeight: 'normal',
+                    background: 'rgba(221, 221, 221, 0.4)',
+                    margin: '1.5px'
+                  }
             }
             onClick={() => st.jumpTo(move)}
           >
             {desc}
-          </button>
+          </Button>
         </li>
       );
     });
@@ -56,7 +64,12 @@ class Game extends React.Component {
     // giao diện
     return (
       <div className="game">
-        <Card>
+        <Card
+          style={{
+            boxShadow: '3px 3px 5px 5px rgb(133, 131, 131)',
+            height: '675px'
+          }}
+        >
           <div className="game-board">
             <Board
               squares={current.squares}
@@ -76,20 +89,39 @@ class Game extends React.Component {
         </Card>
         <Card
           className="game-info"
-          style={{ boxShadow: '3px 3px 5px 5px rgb(133, 131, 131)' }}
+          style={{
+            boxShadow: '3px 3px 5px 5px rgb(133, 131, 131)',
+            background: 'rgb(240, 177, 177)'
+          }}
         >
           <div>
+            <Button
+              style={{ marginLeft: '400px' }}
+              className="logoutButton"
+              variant="contained"
+              color="primary"
+              type="button"
+              onClick={() => st.Logout()}
+            >
+              Log out
+            </Button>
+            <br />
             <div className="Username">
-              Người chơi :{' '}
+              Player :{' '}
               <Button
                 type="button"
+                style={{
+                  background: 'rgba(240, 150, 150, 0.4)',
+                  height: '34px '
+                }}
                 onClick={event => {
                   event.preventDefault();
-                  st.Login(st.username, st.password);
+                  // st.Login(st.username, st.password);
+                  st.GetUserRequest(st.token);
                   st.Info();
                 }}
               >
-                <h3>{st.name}</h3>
+                <h4>{st.name}</h4>
               </Button>
             </div>
             <br />
@@ -97,24 +129,18 @@ class Game extends React.Component {
               <h4>{status}</h4>
             </div>
             <br />
-            <center>
-              <Button
-                variant="contained"
-                color="primary"
-                type="button"
-                onClick={() => st.Logout()}
-              >
-                Đăng xuất
-              </Button>
-            </center>
-            <br />
-            <button
+            <Button
+              style={{
+                background: '#3f51b5',
+                color: '#fff',
+                margin: '10px 0px 10px 23px'
+              }}
               type="button"
               className="buttonSort"
               onClick={() => st.sortClick()}
             >
               {Sortvalue}
-            </button>
+            </Button>
             <ol>{moves}</ol>
           </div>
         </Card>

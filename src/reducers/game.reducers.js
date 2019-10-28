@@ -220,6 +220,24 @@ const GameReducer = (state = initialState, action) => {
       st.isInfo = true;
       return st;
     }
+    case types.logOut: {
+      const st = { ...state };
+      st.history = [
+        {
+          squares: Array.from(Array(20), () => new Array(20))
+        }
+      ];
+      st.stepNumber = 0;
+      st.xIsNext = true;
+      st.col = [0];
+      st.row = [0];
+      st.Sortvalue = 'sorted descending';
+      st.temp = [];
+      st.winner = false;
+      st.color = 'black';
+      st.isInfo = false;
+      return st;
+    }
     case types.noInfo: {
       const st = { ...state };
       st.isInfo = false;

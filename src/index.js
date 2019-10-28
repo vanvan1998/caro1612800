@@ -4,15 +4,18 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import './index.css';
 import thunk from 'redux-thunk';
+import { CookiesProvider } from 'react-cookie';
 import myReducer from './reducers/reducers';
 import Container from './containers/containers';
 import * as serviceWorker from './serviceWorker';
 
 const store = createStore(myReducer, applyMiddleware(thunk));
 ReactDOM.render(
-  <Provider store={store}>
-    <Container />
-  </Provider>,
+  <CookiesProvider>
+    <Provider store={store}>
+      <Container />
+    </Provider>
+  </CookiesProvider>,
   document.getElementById('root')
 );
 
