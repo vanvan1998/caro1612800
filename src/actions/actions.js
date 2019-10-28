@@ -9,6 +9,12 @@ export const checkWinner = squares => {
   };
 };
 
+export const IsMachinePlay = () => {
+  return {
+    type: types.isMachinePlay
+  };
+};
+
 export const boardClick = (i, j) => {
   return {
     type: types.boardClick,

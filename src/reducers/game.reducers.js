@@ -17,8 +17,28 @@ const initialState = {
   temp: [],
   winner: false,
   color: 'black',
-  isInfo: false
+  isInfo: false,
+  isMachinePlay: 'Play with computer'
 };
+
+function MachinePlay(state) {
+  const st = { ...state };
+  const historytemp = st.history.slice(0, st.stepNumber + 1);
+  const current = historytemp[historytemp.length - 1];
+  const squares = JSON.parse(JSON.stringify(current.squares));
+  const temp = [];
+  for (let i = 0; i < 20; i += 1) {
+    for (let j = 0; j < 20; j += 1) {
+      if (!squares[i][j]) {
+        temp[0] = i;
+        temp[1] = j;
+        return temp;
+      }
+    }
+  }
+
+  return temp;
+}
 
 function calculateWinner(squares, state) {
   const st = { ...state };
@@ -204,7 +224,12 @@ function onclickSort(Sortvalue, state) {
 const GameReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.boardClick: {
-      return handleClick(action.data.i, action.data.j, state);
+      if (state.isMachinePlay === 'Play with computer') {
+        return handleClick(action.data.i, action.data.j, state);
+      }
+      const st = handleClick(action.data.i, action.data.j, state);
+      const temp = MachinePlay(st);
+      return handleClick(temp[0], temp[1], st);
     }
     case types.goToMoveClick: {
       return jumpTo(action.data.step, state);
@@ -222,11 +247,6 @@ const GameReducer = (state = initialState, action) => {
     }
     case types.logOut: {
       const st = { ...state };
-      st.history = [
-        {
-          squares: Array.from(Array(20), () => new Array(20))
-        }
-      ];
       st.stepNumber = 0;
       st.xIsNext = true;
       st.col = [0];
@@ -241,6 +261,15 @@ const GameReducer = (state = initialState, action) => {
     case types.noInfo: {
       const st = { ...state };
       st.isInfo = false;
+      return st;
+    }
+    case types.isMachinePlay: {
+      const st = jumpTo(0, state);
+      if (st.isMachinePlay === 'Play with computer') {
+        st.isMachinePlay = '2 player';
+        return st;
+      }
+      st.isMachinePlay = 'Play with computer';
       return st;
     }
     default:

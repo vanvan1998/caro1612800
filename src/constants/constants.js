@@ -25,3 +25,5 @@ export const noUpdateUser = 'NOUPDATEUSER';
 export const updateUser = 'UPDATEUSER';
 
 export const getUser = 'GETUSER';
+
+export const isMachinePlay = 'MACHINEPLAY';

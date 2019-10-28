@@ -18,7 +18,8 @@ const mapStateToProps = state => {
     token: state.LoginReducer.token,
     username: InfoState.username,
     password: InfoState.password,
-    isInfo: GameState.isInfo
+    isInfo: GameState.isInfo,
+    isMachinePlay: GameState.isMachinePlay
   };
 };
 
@@ -38,6 +39,9 @@ const mapDispatchToProps = dispatch => {
     },
     calculateWinner: squares => {
       dispatch(actions.checkWinner(squares));
+    },
+    MachinePlayClick: () => {
+      dispatch(actions.IsMachinePlay());
     },
     Logout: () => {
       dispatch(actions.LogOut());

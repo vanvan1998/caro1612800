@@ -141,6 +141,18 @@ class Game extends React.Component {
             >
               {Sortvalue}
             </Button>
+            <Button
+              style={{
+                background: '#3f51b5',
+                color: '#fff',
+                margin: '10px 0px 10px 23px'
+              }}
+              type="button"
+              className="buttonSort"
+              onClick={() => st.MachinePlayClick()}
+            >
+              {st.isMachinePlay}
+            </Button>
             <ol>{moves}</ol>
           </div>
         </Card>
