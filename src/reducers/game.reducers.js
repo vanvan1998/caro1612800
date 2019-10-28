@@ -21,25 +21,6 @@ const initialState = {
   isMachinePlay: 'Play with computer'
 };
 
-function MachinePlay(state) {
-  const st = { ...state };
-  const historytemp = st.history.slice(0, st.stepNumber + 1);
-  const current = historytemp[historytemp.length - 1];
-  const squares = JSON.parse(JSON.stringify(current.squares));
-  const temp = [];
-  for (let i = 0; i < 20; i += 1) {
-    for (let j = 0; j < 20; j += 1) {
-      if (!squares[i][j]) {
-        temp[0] = i;
-        temp[1] = j;
-        return temp;
-      }
-    }
-  }
-
-  return temp;
-}
-
 function calculateWinner(squares, state) {
   const st = { ...state };
   st.winner = false;
@@ -177,6 +158,28 @@ function calculateWinner(squares, state) {
   return st;
 }
 
+function MachinePlay(state) {
+  const st = { ...state };
+  const historytemp = st.history.slice(0, st.stepNumber + 1);
+  const current = historytemp[historytemp.length - 1];
+  const squares = JSON.parse(JSON.stringify(current.squares));
+
+  // tìm i,j
+  const temp = [];
+  temp[0] = 0;
+  temp[1] = 0;
+  for (let i = 0; i < 20; i += 1) {
+    for (let j = 0; j < 20; j += 1) {
+      if (!squares[i][j]) {
+        temp[0] = i;
+        temp[1] = j;
+        return temp;
+      }
+    }
+  }
+  return temp;
+}
+
 function handleClick(i, j, state) {
   const st = { ...state };
   const historytemp = st.history.slice(0, st.stepNumber + 1);
@@ -224,12 +227,15 @@ function onclickSort(Sortvalue, state) {
 const GameReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.boardClick: {
-      if (state.isMachinePlay === 'Play with computer') {
-        return handleClick(action.data.i, action.data.j, state);
+      if (state.isMachinePlay !== 'Play with computer') {
+        const st = handleClick(action.data.i, action.data.j, state);
+        if (!st.xIsNext) {
+          const temp = MachinePlay(st);
+          return handleClick(temp[0], temp[1], st);
+        }
+        return st;
       }
-      const st = handleClick(action.data.i, action.data.j, state);
-      const temp = MachinePlay(st);
-      return handleClick(temp[0], temp[1], st);
+      return handleClick(action.data.i, action.data.j, state);
     }
     case types.goToMoveClick: {
       return jumpTo(action.data.step, state);
