@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import '../App.css';
 import { Redirect } from 'react-router-dom';
+import cookie from 'react-cookies';
 
 export default class SignIn extends React.Component {
   constructor() {
@@ -22,6 +23,12 @@ export default class SignIn extends React.Component {
 
   render() {
     const st = this.props;
+    console.log('login');
+    const UserCookie = cookie.load('userId');
+    if (UserCookie && !st.isLogin) {
+      st.GetUserRequest(cookie.load('userId'));
+      return <Redirect to="/game" />;
+    }
     if (st.isLogin) {
       return <Redirect to="/game" />;
     }

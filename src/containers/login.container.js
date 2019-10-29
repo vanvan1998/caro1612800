@@ -14,6 +14,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    GetUserRequest: token => {
+      dispatch(actions.GetUserRequest(token));
+    },
     Login: (username, password) => {
       dispatch(actions.loginRequest(username, password));
     }

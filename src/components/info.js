@@ -8,6 +8,7 @@ import InfoSharpIcon from '@material-ui/icons/InfoSharp';
 import Container from '@material-ui/core/Container';
 import '../App.css';
 import { Redirect } from 'react-router-dom';
+import cookie from 'react-cookies';
 
 export default class Info extends React.PureComponent {
   constructor() {
@@ -29,6 +30,11 @@ export default class Info extends React.PureComponent {
     this.email = st.email;
     this.dateOfBirth = st.dateOfBirth;
     this.sex = st.sex;
+    const UserCookie = cookie.load('userId');
+    if (UserCookie && this.username === '') {
+      st.GetUserRequest(cookie.load('userId'));
+      return <Redirect to="/info" />;
+    }
     if (!st.isLogin) {
       return <Redirect to="/" />;
     }
@@ -179,7 +185,7 @@ export default class Info extends React.PureComponent {
                     onClick={event => {
                       event.preventDefault();
                       // st.Login(st.username, st.password);
-                      st.GetUserRequest(st.token);
+                      st.GetUserRequest(cookie.load('userId'));
                       st.IsGame();
                     }}
                   >

@@ -3,17 +3,24 @@ import '../App.css';
 import { Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
+import cookie from 'react-cookies';
 import Board from './board';
 
 class Game extends React.Component {
   render() {
     const st = this.props;
-    if (st.token === 'err') {
-      return <Redirect to="/" />;
+    const UserCookie = cookie.load('userId');
+    if (UserCookie) {
+      st.GetUserRequest(cookie.load('userId'));
+    } else {
+      if (st.token === 'err') {
+        return <Redirect to="/" />;
+      }
+      if (st.token === '') {
+        return <Redirect to="/" />;
+      }
     }
-    if (st.token === '') {
-      return <Redirect to="/" />;
-    }
+
     if (st.isInfo) {
       return <Redirect to="/info" />;
     }
@@ -101,7 +108,10 @@ class Game extends React.Component {
               variant="contained"
               color="primary"
               type="button"
-              onClick={() => st.Logout()}
+              onClick={event => {
+                event.preventDefault();
+                st.Logout();
+              }}
             >
               Log out
             </Button>
@@ -117,7 +127,7 @@ class Game extends React.Component {
                 onClick={event => {
                   event.preventDefault();
                   // st.Login(st.username, st.password);
-                  st.GetUserRequest(st.token);
+                  st.GetUserRequest(cookie.load('userId'));
                   st.Info();
                 }}
               >

@@ -47,13 +47,13 @@ const LoginReducer = (state = initialState, action) => {
         st.token = action.data.token;
         st.username = action.data.res.data.username;
         st.name = action.data.res.data.name;
-        const expires = new Date();
-        expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
-        // cookie.save('userId', st.token, { path: '/' });
-        cookie.save('userId', st.token, {
-          path: '/',
-          expires
-        });
+        // const expires = new Date();
+        // expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
+        // // cookie.save('userId', st.token, { path: '/' });
+        // cookie.save('userId', st.token, {
+        //   path: '/',
+        //   expires
+        // });
         st.email = action.data.res.data.email;
         st.dateOfBirth = action.data.res.data.dateOfBirth;
         st.sex = action.data.res.data.sex;
