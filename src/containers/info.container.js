@@ -15,7 +15,9 @@ const mapStateToProps = state => {
     id: InfoState.id,
     isGame: state.InFoReducer.isGame,
     isUpdate: InfoState.isUpdate,
-    token: InfoState.token
+    token: InfoState.token,
+    statusUploadImage: state.InFoReducer.statusUploadImage,
+    image: InfoState.image
   };
 };
 
@@ -36,6 +38,12 @@ const mapDispatchToProps = dispatch => {
     GetUserRequest: token => {
       dispatch(actions.GetUserRequest(token));
     },
+    UploadImageRequest: formdata => {
+      dispatch(actions.UploadImageRequest(formdata));
+    },
+    NoStatusImage: () => {
+      dispatch(actions.NoStatusImage());
+    },
     UpdateUser: (
       id,
       username,
@@ -44,7 +52,8 @@ const mapDispatchToProps = dispatch => {
       dateOfBirth,
       sex,
       password,
-      conformPassword
+      conformPassword,
+      token
     ) => {
       dispatch(
         actions.UpdateUserRequest(
@@ -55,7 +64,8 @@ const mapDispatchToProps = dispatch => {
           dateOfBirth,
           sex,
           password,
-          conformPassword
+          conformPassword,
+          token
         )
       );
     }

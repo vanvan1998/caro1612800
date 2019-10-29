@@ -15,6 +15,12 @@ export const IsMachinePlay = () => {
   };
 };
 
+export const NoStatusImage = () => {
+  return {
+    type: types.noStatusImage
+  };
+};
+
 export const boardClick = (i, j) => {
   return {
     type: types.boardClick,
@@ -37,7 +43,7 @@ export const sortClick = () => {
 
 function OnclickLogin(username, password) {
   const res = axios
-    .post('https://restful1612800.herokuapp.com/api/login', {
+    .post(`${types.stringConnect}/api/login`, {
       username,
       password
     })
@@ -72,7 +78,7 @@ function OnclickRegister(
   confirmPassword
 ) {
   const res = axios
-    .post('https://restful1612800.herokuapp.com/api/register', {
+    .post(`${types.stringConnect}/api/register`, {
       username,
       name,
       email,
@@ -185,19 +191,26 @@ function OnclickUpdateUser(
   dateOfBirth,
   sex,
   password,
-  confirmPassword
+  confirmPassword,
+  token
 ) {
   const res = axios
-    .post('https://restful1612800.herokuapp.com/api/users/update', {
-      _id: id,
-      username,
-      name,
-      email,
-      dateOfBirth,
-      sex,
-      newPassword: password,
-      confirmNewPassword: confirmPassword
-    })
+    .post(
+      `${types.stringConnect}/api/users/update`,
+      {
+        _id: id,
+        username,
+        name,
+        email,
+        dateOfBirth,
+        sex,
+        newPassword: password,
+        confirmNewPassword: confirmPassword
+      },
+      {
+        headers: { Authorization: `bearer ${token}` }
+      }
+    )
     .catch(error => {
       return error;
     });
@@ -213,6 +226,7 @@ export const UpdateUser = (
   sex,
   password,
   confirmPassword,
+  token,
   res
 ) => {
   return {
@@ -226,6 +240,7 @@ export const UpdateUser = (
       sex,
       password,
       confirmPassword,
+      token,
       res
     }
   };
@@ -239,7 +254,8 @@ export const UpdateUserRequest = (
   dateOfBirth,
   sex,
   password,
-  confirmPassword
+  confirmPassword,
+  token
 ) => {
   return dispatch => {
     return OnclickUpdateUser(
@@ -250,7 +266,8 @@ export const UpdateUserRequest = (
       dateOfBirth,
       sex,
       password,
-      confirmPassword
+      confirmPassword,
+      token
     ).then(res => {
       dispatch(
         UpdateUser(
@@ -262,6 +279,7 @@ export const UpdateUserRequest = (
           sex,
           password,
           confirmPassword,
+          token,
           res
         )
       );
@@ -277,7 +295,7 @@ export const NoUpdateUser = () => {
 
 function OnclickGetUser(token) {
   const res = axios
-    .get('https://restful1612800.herokuapp.com/api/users/me', {
+    .get(`${types.stringConnect}/api/users/me`, {
       headers: { Authorization: `bearer ${token}` }
     })
     .catch(error => {
@@ -297,6 +315,30 @@ export const GetUserRequest = token => {
   return dispatch => {
     return OnclickGetUser(token).then(res => {
       dispatch(GetUser(token, res));
+    });
+  };
+};
+
+function OnclickUploadImage(formdata) {
+  const res = axios
+    .post(`${types.stringConnect}/api/users/uploadImage`, formdata, {})
+    .catch(error => {
+      return error;
+    });
+  return res;
+}
+
+export const UploadImage = (formdata, res) => {
+  return {
+    type: types.uploadImage,
+    data: { formdata, res }
+  };
+};
+
+export const UploadImageRequest = formdata => {
+  return dispatch => {
+    return OnclickUploadImage(formdata).then(res => {
+      dispatch(UploadImage(formdata, res));
     });
   };
 };

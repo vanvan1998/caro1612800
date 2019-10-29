@@ -23,7 +23,6 @@ export default class SignIn extends React.Component {
 
   render() {
     const st = this.props;
-    console.log('login');
     const UserCookie = cookie.load('userId');
     if (UserCookie && !st.isLogin) {
       st.GetUserRequest(cookie.load('userId'));
@@ -85,7 +84,10 @@ export default class SignIn extends React.Component {
               <Button
                 fullWidth
                 variant="contained"
-                color="primary"
+                color="secondary"
+                style={{
+                  background: 'rgb(255, 70, 80,0.8)'
+                }}
                 onClick={event => {
                   event.preventDefault();
                   st.Login(this.username, this.password);

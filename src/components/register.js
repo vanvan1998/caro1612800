@@ -159,7 +159,10 @@ export default class SignUp extends React.PureComponent {
                     );
                   }}
                   variant="contained"
-                  color="primary"
+                  color="secondary"
+                  style={{
+                    background: 'rgb(255, 70, 80,0.8)'
+                  }}
                 >
                   Sign Up
                 </Button>

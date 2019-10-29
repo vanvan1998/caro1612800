@@ -10,6 +10,7 @@ const initialState = {
   email: '',
   dateOfBirth: '',
   sex: '',
+  image: '',
   id: '',
   isUpdate: ''
 };
@@ -23,6 +24,7 @@ const LoginReducer = (state = initialState, action) => {
       try {
         st.token = action.data.res.data.token;
         st.name = action.data.res.data.userModified.name;
+        st.image = action.data.res.data.userModified.userImage;
         const expires = new Date();
         expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
         // cookie.save('userId', st.token, { path: '/' });
@@ -47,6 +49,8 @@ const LoginReducer = (state = initialState, action) => {
         st.token = action.data.token;
         st.username = action.data.res.data.username;
         st.name = action.data.res.data.name;
+        st.image = action.data.res.data.userImage;
+        console.log(action.data.res.data);
         // const expires = new Date();
         // expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
         // // cookie.save('userId', st.token, { path: '/' });
@@ -74,13 +78,13 @@ const LoginReducer = (state = initialState, action) => {
       st.password = '';
       st.dateOfBirth = '';
       st.sex = '';
+      st.image = '';
       cookie.remove('userId', { path: '/' });
       return st;
     }
     case types.updateUser: {
       const st = { ...state };
       st.username = action.data.username;
-      st.password = action.data.password;
       st.email = action.data.email;
       st.dateOfBirth = action.data.dateOfBirth;
       st.sex = action.data.sex;

@@ -1,3 +1,7 @@
+// https://restful1612800.herokuapp.com
+// http://localhost:3000
+export const stringConnect = 'https://restful1612800.herokuapp.com';
+
 export const boardClick = 'BOARD_CLICK';
 
 export const checkWinner = 'WINNER';
@@ -27,3 +31,7 @@ export const updateUser = 'UPDATEUSER';
 export const getUser = 'GETUSER';
 
 export const isMachinePlay = 'MACHINEPLAY';
+
+export const uploadImage = 'UPLOADIMAGE';
+
+export const noStatusImage = 'NOSTATUSIMAGE';

@@ -43,12 +43,12 @@ class Game extends React.Component {
               st.stepNumber === move
                 ? {
                     fontWeight: 'bold',
-                    background: 'rgba(221, 221, 221, 0.4)',
+                    background: 'rgba(210, 200, 200, 0.8)',
                     margin: '2px'
                   }
                 : {
                     fontWeight: 'normal',
-                    background: 'rgba(221, 221, 221, 0.4)',
+                    background: 'rgba(230, 200, 200, 0.8)',
                     margin: '1.5px'
                   }
             }
@@ -98,15 +98,18 @@ class Game extends React.Component {
           className="game-info"
           style={{
             boxShadow: '3px 3px 5px 5px rgb(133, 131, 131)',
-            background: 'rgb(240, 177, 177)'
+            background: 'rgb(250, 215, 215)'
           }}
         >
           <div>
             <Button
-              style={{ marginLeft: '400px' }}
+              style={{
+                marginLeft: '400px',
+                background: 'rgb(255, 100, 110,0.8)'
+              }}
               className="logoutButton"
               variant="contained"
-              color="primary"
+              color="secondary"
               type="button"
               onClick={event => {
                 event.preventDefault();
@@ -121,7 +124,7 @@ class Game extends React.Component {
               <Button
                 type="button"
                 style={{
-                  background: 'rgba(240, 150, 150, 0.4)',
+                  background: 'rgba(240, 160, 160, 0.4)',
                   height: '34px '
                 }}
                 onClick={event => {
@@ -141,10 +144,12 @@ class Game extends React.Component {
             <br />
             <Button
               style={{
-                background: '#3f51b5',
+                background: 'rgb(255, 100, 110,0.8)',
                 color: '#fff',
                 margin: '10px 0px 10px 23px'
               }}
+              variant="contained"
+              color="secondary"
               type="button"
               className="buttonSort"
               onClick={() => st.sortClick()}
@@ -153,10 +158,12 @@ class Game extends React.Component {
             </Button>
             <Button
               style={{
-                background: '#3f51b5',
+                background: 'rgb(255, 100, 110,0.8)',
                 color: '#fff',
                 margin: '10px 0px 10px 23px'
               }}
+              variant="contained"
+              color="secondary"
               type="button"
               className="buttonSort"
               onClick={() => st.MachinePlayClick()}
