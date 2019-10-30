@@ -19,7 +19,8 @@ const mapStateToProps = state => {
     username: InfoState.username,
     password: InfoState.password,
     isInfo: GameState.isInfo,
-    isMachinePlay: GameState.isMachinePlay
+    isMachinePlay: GameState.isMachinePlay,
+    image: InfoState.image
   };
 };
 

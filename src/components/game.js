@@ -4,13 +4,22 @@ import { Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import cookie from 'react-cookies';
+import RoundImg from 'react-rounded-image';
 import Board from './board';
+import * as types from '../constants/constants';
 
 class Game extends React.Component {
+  constructor() {
+    super();
+    this.imagesrc = `${types.stringConnect}/uploads/account.png`;
+  }
+
   render() {
     const st = this.props;
     const UserCookie = cookie.load('userId');
-
+    if (st.image) {
+      this.imagesrc = types.stringConnect + st.image;
+    }
     if (UserCookie && st.name === '') {
       st.GetUserRequest(cookie.load('userId'));
     } else {
@@ -119,6 +128,15 @@ class Game extends React.Component {
             >
               Log out
             </Button>
+            <br />
+            <center>
+              <RoundImg
+                imageWidth="150"
+                imageHeight="150"
+                roundedColor="white"
+                image={this.imagesrc}
+              />
+            </center>
             <br />
             <div className="Username">
               Player :{' '}
