@@ -50,7 +50,6 @@ const LoginReducer = (state = initialState, action) => {
         st.username = action.data.res.data.username;
         st.name = action.data.res.data.name;
         st.image = action.data.res.data.userImage;
-        console.log(action.data.res.data);
         // const expires = new Date();
         // expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
         // // cookie.save('userId', st.token, { path: '/' });

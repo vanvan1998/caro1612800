@@ -10,7 +10,8 @@ class Game extends React.Component {
   render() {
     const st = this.props;
     const UserCookie = cookie.load('userId');
-    if (UserCookie) {
+
+    if (UserCookie && st.name === '') {
       st.GetUserRequest(cookie.load('userId'));
     } else {
       if (st.token === 'err') {
@@ -130,7 +131,7 @@ class Game extends React.Component {
                 onClick={event => {
                   event.preventDefault();
                   // st.Login(st.username, st.password);
-                  st.GetUserRequest(cookie.load('userId'));
+                  // st.GetUserRequest(cookie.load('userId'));
                   st.Info();
                 }}
               >

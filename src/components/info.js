@@ -61,6 +61,7 @@ export default class Info extends React.PureComponent {
     if (!st.isLogin) {
       return <Redirect to="/" />;
     }
+
     if (st.statusUploadImage !== '') {
       st.NoStatusImage();
       st.GetUserRequest(cookie.load('userId'));
@@ -249,7 +250,7 @@ export default class Info extends React.PureComponent {
                       onClick={event => {
                         event.preventDefault();
                         // st.Login(st.username, st.password);
-                        st.GetUserRequest(cookie.load('userId'));
+                        // st.GetUserRequest(cookie.load('userId'));
                         st.IsGame();
                       }}
                     >

@@ -12,6 +12,9 @@ import Container from '@material-ui/core/Container';
 import '../App.css';
 import { Redirect } from 'react-router-dom';
 import cookie from 'react-cookies';
+// import * as types from '../constants/constants';
+
+// const axios = require('axios');
 
 export default class SignIn extends React.Component {
   constructor() {
@@ -20,6 +23,13 @@ export default class SignIn extends React.Component {
     this.password = '';
     this.err = '';
   }
+
+  // buttonclick = async () => {
+  //   // const res = await axios.get(`${types.stringConnect}/api/auth/facebook`, {
+  //   //   headers: { 'Access-Control-Allow-Origin': '*' }
+  //   // });
+  //   // return <Redirect to="/game" />;
+  // };
 
   render() {
     const st = this.props;
@@ -98,9 +108,22 @@ export default class SignIn extends React.Component {
               </Button>
               <Grid className="footer-login" container>
                 <Grid item xs>
-                  <Link href="/" variant="body2">
-                    Forgot password?
-                  </Link>
+                  {/* <Link
+                    href="http://localhost:3000/api/auth/facebook"
+                    variant="body2"
+                  >
+                    Login with Facebook
+                  </Link> */}
+                  {/* <Button
+                    crossOrigin="true"
+                    fullWidth
+                    variant="contained"
+                    color="secondary"
+                    style={{
+                      background: 'rgb(255, 70, 80,0.8)'
+                    }}
+                    onClick={this.buttonclick}
+                  /> */}
                 </Grid>
                 <Grid item>
                   <Link href="/register" variant="body2">

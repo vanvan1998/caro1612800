@@ -43,7 +43,7 @@ export const sortClick = () => {
 
 function OnclickLogin(username, password) {
   const res = axios
-    .post(`${types.stringConnect}/api/login`, {
+    .post(`${types.stringConnect}/api/auth/login`, {
       username,
       password
     })
@@ -78,7 +78,7 @@ function OnclickRegister(
   confirmPassword
 ) {
   const res = axios
-    .post(`${types.stringConnect}/api/register`, {
+    .post(`${types.stringConnect}/api/auth/register`, {
       username,
       name,
       email,
