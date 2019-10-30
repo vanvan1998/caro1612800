@@ -319,26 +319,28 @@ export const GetUserRequest = token => {
   };
 };
 
-function OnclickUploadImage(formdata) {
+function OnclickUploadImage(formdata, token) {
   const res = axios
-    .post(`${types.stringConnect}/api/users/uploadImage`, formdata, {})
+    .post(`${types.stringConnect}/api/users/uploadImage`, formdata, {
+      headers: { Authorization: `bearer ${token}` }
+    })
     .catch(error => {
       return error;
     });
   return res;
 }
 
-export const UploadImage = (formdata, res) => {
+export const UploadImage = (formdata, token, res) => {
   return {
     type: types.uploadImage,
     data: { formdata, res }
   };
 };
 
-export const UploadImageRequest = formdata => {
+export const UploadImageRequest = (formdata, token) => {
   return dispatch => {
-    return OnclickUploadImage(formdata).then(res => {
-      dispatch(UploadImage(formdata, res));
+    return OnclickUploadImage(formdata, token).then(res => {
+      dispatch(UploadImage(formdata, token, res));
     });
   };
 };

@@ -38,8 +38,8 @@ const mapDispatchToProps = dispatch => {
     GetUserRequest: token => {
       dispatch(actions.GetUserRequest(token));
     },
-    UploadImageRequest: formdata => {
-      dispatch(actions.UploadImageRequest(formdata));
+    UploadImageRequest: (formdata, token) => {
+      dispatch(actions.UploadImageRequest(formdata, token));
     },
     NoStatusImage: () => {
       dispatch(actions.NoStatusImage());

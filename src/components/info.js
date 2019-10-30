@@ -29,18 +29,19 @@ export default class Info extends React.PureComponent {
   }
 
   fileSelectedHandler = event => {
-    // this.fileImage = new Blob([event.target.files[0]]);
     // eslint-disable-next-line prefer-destructuring
     this.fileImage = event.target.files[0];
   };
 
   fileUploadHandler = async event => {
-    const st = this.props;
-    const fd = new FormData();
-    fd.append('_id', st.id);
-    fd.append('userImage', this.fileImage, this.fileImage.name);
-    event.preventDefault();
-    st.UploadImageRequest(fd);
+    if (this.fileImage) {
+      const st = this.props;
+      const fd = new FormData();
+      fd.append('_id', st.id);
+      fd.append('userImage', this.fileImage, this.fileImage.name);
+      event.preventDefault();
+      st.UploadImageRequest(fd, cookie.load('userId'));
+    }
   };
 
   render() {

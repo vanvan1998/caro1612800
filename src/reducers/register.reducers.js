@@ -18,7 +18,11 @@ const RegisterReducer = (state = initialState, action) => {
         st.name = action.data.res.data.name;
         st.isRegister = true;
       } catch (err) {
-        st.err = action.data.res.response.data.message;
+        try {
+          st.err = action.data.res.response.data.message;
+        } catch (err) {
+          st.err = 'Can not connect, please try again';
+        }
         st.CheckLoadRegister = true;
       }
       return st;
