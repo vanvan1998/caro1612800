@@ -2,7 +2,7 @@ import * as types from '../constants/constants';
 
 const axios = require('axios');
 
-export const checkWinner = squares => {
+export const CheckWinner = squares => {
   return {
     type: types.checkWinner,
     data: { squares }
@@ -21,21 +21,21 @@ export const NoStatusImage = () => {
   };
 };
 
-export const boardClick = (i, j) => {
+export const BoardClick = (i, j) => {
   return {
     type: types.boardClick,
     data: { i, j }
   };
 };
 
-export const goToMoveClick = step => {
+export const GoToMoveClick = step => {
   return {
     type: types.goToMoveClick,
     data: { step }
   };
 };
 
-export const sortClick = () => {
+export const SortClick = () => {
   return {
     type: types.sortClick
   };
@@ -53,17 +53,17 @@ function OnclickLogin(username, password) {
   return res;
 }
 
-export const login = (username, password, res) => {
+export const Login = (username, password, res) => {
   return {
     type: types.login,
     data: { username, password, res }
   };
 };
 
-export const loginRequest = (username, password) => {
+export const LoginRequest = (username, password) => {
   return dispatch => {
     return OnclickLogin(username, password).then(res => {
-      dispatch(login(username, password, res));
+      dispatch(Login(username, password, res));
     });
   };
 };
@@ -341,6 +341,34 @@ export const UploadImageRequest = (formdata, token) => {
   return dispatch => {
     return OnclickUploadImage(formdata, token).then(res => {
       dispatch(UploadImage(formdata, token, res));
+    });
+  };
+};
+
+function OnclickLoginWithFacebook(accessToken, userID) {
+  const url = 'http://localhost:3000';
+  const res = axios
+    .post(`${url}/api/auth/login-with-facebook`, {
+      accessToken,
+      userID
+    })
+    .catch(error => {
+      return error;
+    });
+  return res;
+}
+
+export const LoginWithFacebook = (accessToken, userID, res) => {
+  return {
+    type: types.loginWithFacebook,
+    data: { accessToken, userID, res }
+  };
+};
+
+export const LoginWithFacebookRequest = (accessToken, userID) => {
+  return dispatch => {
+    return OnclickLoginWithFacebook(accessToken, userID).then(res => {
+      dispatch(LoginWithFacebook(accessToken, userID, res));
     });
   };
 };

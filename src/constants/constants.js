@@ -1,6 +1,7 @@
 // https://restful1612800.herokuapp.com
 // http://localhost:3000
-export const stringConnect = 'https://restful1612800.herokuapp.com';
+// export const stringConnect = 'https://restful1612800.herokuapp.com';
+export const stringConnect = 'http://localhost:3000';
 
 export const boardClick = 'BOARD_CLICK';
 
@@ -35,3 +36,5 @@ export const isMachinePlay = 'MACHINEPLAY';
 export const uploadImage = 'UPLOADIMAGE';
 
 export const noStatusImage = 'NOSTATUSIMAGE';
+
+export const loginWithFacebook = 'LOGINWITHFACEBOOK';

@@ -14,8 +14,6 @@ import { Redirect } from 'react-router-dom';
 import cookie from 'react-cookies';
 // import * as types from '../constants/constants';
 
-// const axios = require('axios');
-
 export default class SignIn extends React.Component {
   constructor() {
     super();
@@ -24,12 +22,21 @@ export default class SignIn extends React.Component {
     this.err = '';
   }
 
-  // buttonclick = async () => {
-  //   // const res = await axios.get(`${types.stringConnect}/api/auth/facebook`, {
-  //   //   headers: { 'Access-Control-Allow-Origin': '*' }
-  //   // });
-  //   // return <Redirect to="/game" />;
-  // };
+  loginWithFacebook = event => {
+    const st = this.props;
+    const { FB } = window;
+    FB.login(
+      response => {
+        const {
+          authResponse: { accessToken, userID }
+        } = response;
+        event.persist();
+        st.LoginWithFacebookRequest(accessToken, userID);
+      },
+      { scope: 'public_profile, email' }
+    );
+    return false;
+  };
 
   render() {
     const st = this.props;
@@ -114,7 +121,7 @@ export default class SignIn extends React.Component {
                   >
                     Login with Facebook
                   </Link> */}
-                  {/* <Button
+                  <Button
                     crossOrigin="true"
                     fullWidth
                     variant="contained"
@@ -122,8 +129,10 @@ export default class SignIn extends React.Component {
                     style={{
                       background: 'rgb(255, 70, 80,0.8)'
                     }}
-                    onClick={this.buttonclick}
-                  /> */}
+                    onClick={this.loginWithFacebook}
+                  >
+                    Facebook
+                  </Button>
                 </Grid>
                 <Grid item>
                   <Link href="/register" variant="body2">

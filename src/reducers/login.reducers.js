@@ -50,19 +50,36 @@ const LoginReducer = (state = initialState, action) => {
         st.username = action.data.res.data.username;
         st.name = action.data.res.data.name;
         st.image = action.data.res.data.userImage;
-        // const expires = new Date();
-        // expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
-        // // cookie.save('userId', st.token, { path: '/' });
-        // cookie.save('userId', st.token, {
-        //   path: '/',
-        //   expires
-        // });
         st.email = action.data.res.data.email;
         st.dateOfBirth = action.data.res.data.dateOfBirth;
         st.sex = action.data.res.data.sex;
         // eslint-disable-next-line no-underscore-dangle
         st.id = action.data.res.data._id;
         st.isLogin = true;
+      } catch (err) {
+        st.token = 'err';
+      }
+      return st;
+    }
+    case types.loginWithFacebook: {
+      const st = { ...state };
+      try {
+        st.token = action.data.res.data.token;
+        st.name = action.data.res.data.userModified.name;
+        st.image = action.data.res.data.userModified.userImage;
+        const expires = new Date();
+        expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
+        cookie.save('userId', st.token, {
+          path: '/',
+          expires
+        });
+        st.email = action.data.res.data.userModified.email;
+        st.dateOfBirth = action.data.res.data.userModified.dateOfBirth;
+        st.sex = action.data.res.data.userModified.sex;
+        // eslint-disable-next-line no-underscore-dangle
+        st.id = action.data.res.data.userModified._id;
+        st.isLogin = true;
+        console.log(st);
       } catch (err) {
         st.token = 'err';
       }

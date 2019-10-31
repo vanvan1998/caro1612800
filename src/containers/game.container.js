@@ -30,16 +30,16 @@ const mapDispatchToProps = dispatch => {
       dispatch(actions.GetUserRequest(token));
     },
     handleClick: (i, j) => {
-      dispatch(actions.boardClick(i, j));
+      dispatch(actions.BoardClick(i, j));
     },
     jumpTo: step => {
-      dispatch(actions.goToMoveClick(step));
+      dispatch(actions.GoToMoveClick(step));
     },
     sortClick: () => {
-      dispatch(actions.sortClick());
+      dispatch(actions.SortClick());
     },
     calculateWinner: squares => {
-      dispatch(actions.checkWinner(squares));
+      dispatch(actions.CheckWinner(squares));
     },
     MachinePlayClick: () => {
       dispatch(actions.IsMachinePlay());
@@ -51,7 +51,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(actions.Info());
     },
     Login: (username, password) => {
-      dispatch(actions.loginRequest(username, password));
+      dispatch(actions.LoginRequest(username, password));
     }
   };
 };

@@ -18,7 +18,10 @@ const mapDispatchToProps = dispatch => {
       dispatch(actions.GetUserRequest(token));
     },
     Login: (username, password) => {
-      dispatch(actions.loginRequest(username, password));
+      dispatch(actions.LoginRequest(username, password));
+    },
+    LoginWithFacebookRequest: (accessToken, userID) => {
+      dispatch(actions.LoginWithFacebookRequest(accessToken, userID));
     }
   };
 };

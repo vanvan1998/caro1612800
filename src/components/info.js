@@ -167,10 +167,11 @@ export default class Info extends React.PureComponent {
                       variant="outlined"
                       required
                       fullWidth
-                      id="username"
+                      id="username1"
                       label="Username"
-                      name="username"
+                      name="username1"
                       value={this.username}
+                      autoComplete="aaaaa"
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -189,15 +190,14 @@ export default class Info extends React.PureComponent {
                   <Grid item xs={12}>
                     <TextField
                       variant="outlined"
-                      required
                       fullWidth
                       onChange={event => {
                         this.password = event.target.value;
                       }}
-                      name="password"
+                      name="abcpassword"
                       label="Password"
                       type="password"
-                      id="password"
+                      id="abcpassword"
                     />
                   </Grid>
                   <Grid item xs={12}>
