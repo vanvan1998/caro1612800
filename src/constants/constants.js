@@ -1,6 +1,6 @@
 // https://restful1612800.herokuapp.com
 // http://localhost:3000
-export const stringConnect = 'http://localhost:3000';
+export const stringConnect = 'https://restful1612800.herokuapp.com';
 
 export const boardClick = 'BOARD_CLICK';
 
