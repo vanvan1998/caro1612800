@@ -43,7 +43,6 @@
     "yarn": "^1.17.3",
     "yarn-install": "^1.0.0"
   },
-  "proxy": "http://localhost:3000",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
