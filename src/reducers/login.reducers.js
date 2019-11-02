@@ -32,13 +32,6 @@ const LoginReducer = (state = initialState, action) => {
         st.token = action.data.res.data.token;
         st.name = action.data.res.data.userModified.name;
         st.image = action.data.res.data.userModified.userImage;
-        // const expires = new Date();
-        // expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
-        // // cookie.save('userId', st.token, { path: '/' });
-        // cookie.save('userId', st.token, {
-        //   path: '/',
-        //   expires
-        // });
         setCookie('userId', st.token, 7);
         st.email = action.data.res.data.userModified.email;
         st.dateOfBirth = action.data.res.data.userModified.dateOfBirth;
@@ -75,12 +68,13 @@ const LoginReducer = (state = initialState, action) => {
         st.token = action.data.res.data.token;
         st.name = action.data.res.data.userModified.name;
         st.image = action.data.res.data.userModified.userImage;
-        const expires = new Date();
-        expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
-        cookie.save('userId', st.token, {
-          path: '/',
-          expires
-        });
+        // const expires = new Date();
+        // expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
+        // cookie.save('userId', st.token, {
+        //   path: '/',
+        //   expires
+        // });
+        setCookie('userId', st.token, 7);
         st.email = action.data.res.data.userModified.email;
         st.dateOfBirth = action.data.res.data.userModified.dateOfBirth;
         st.sex = action.data.res.data.userModified.sex;

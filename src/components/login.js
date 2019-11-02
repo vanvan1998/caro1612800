@@ -1,14 +1,4 @@
 import React from 'react';
-// import Button from '@material-ui/core/Button';
-// import CssBaseline from '@material-ui/core/CssBaseline';
-// import TextField from '@material-ui/core/TextField';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import Checkbox from '@material-ui/core/Checkbox';
-// import Link from '@material-ui/core/Link';
-// import Grid from '@material-ui/core/Grid';
-// import LockRoundedIcon from '@material-ui/icons/LockRounded';
-// import Typography from '@material-ui/core/Typography';
-// import Container from '@material-ui/core/Container';
 import '../App.css';
 import { Redirect } from 'react-router-dom';
 import cookie from 'react-cookies';
@@ -42,10 +32,10 @@ export default class SignIn extends React.Component {
     const UserCookie = cookie.load('userId');
     if (UserCookie && !st.isLogin) {
       st.GetUserRequest(cookie.load('userId'));
-      return <Redirect to="/game" />;
+      return <Redirect to="/options" />;
     }
     if (st.isLogin) {
-      return <Redirect to="/game" />;
+      return <Redirect to="/options" />;
     }
     if (st.token === 'err') {
       this.err = 'Username hoặc mật khẩu không đúng!!!';

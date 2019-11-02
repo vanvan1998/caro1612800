@@ -1,4 +1,4 @@
-// import { combineReducers } from 'redux';
+import cookie from 'react-cookies';
 import * as types from '../constants/constants';
 
 const history = [
@@ -18,7 +18,7 @@ const initialState = {
   winner: false,
   color: 'black',
   isInfo: false,
-  isMachinePlay: 'Play with computer'
+  typePlay: ''
 };
 
 function calculateWinner(squares, state) {
@@ -227,7 +227,7 @@ function onclickSort(Sortvalue, state) {
 const GameReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.boardClick: {
-      if (state.isMachinePlay !== 'Play with computer') {
+      if (state.typePlay === 'Play with computer') {
         const st = handleClick(action.data.i, action.data.j, state);
         if (!st.xIsNext) {
           const temp = MachinePlay(st);
@@ -262,6 +262,8 @@ const GameReducer = (state = initialState, action) => {
       st.winner = false;
       st.color = 'black';
       st.isInfo = false;
+      st.typePlay = '';
+      cookie.remove('typePlay', { path: '/' });
       return st;
     }
     case types.noInfo: {
@@ -269,13 +271,31 @@ const GameReducer = (state = initialState, action) => {
       st.isInfo = false;
       return st;
     }
+    case types.isOptionsPage: {
+      const st = { ...state };
+      st.typePlay = '';
+      cookie.remove('typePlay', { path: '/' });
+      return st;
+    }
     case types.isMachinePlay: {
       const st = jumpTo(0, state);
-      if (st.isMachinePlay === 'Play with computer') {
-        st.isMachinePlay = '2 player';
-        return st;
-      }
-      st.isMachinePlay = 'Play with computer';
+      st.typePlay = 'Play with computer';
+      cookie.save('typePlay', st.typePlay, {
+        path: '/'
+      });
+      return st;
+    }
+    case types.isNomalPlay: {
+      const st = jumpTo(0, state);
+      st.typePlay = 'Play nomal';
+      cookie.save('typePlay', st.typePlay, {
+        path: '/'
+      });
+      return st;
+    }
+    case types.setTypePlay: {
+      const st = { ...state };
+      st.typePlay = cookie.load('typePlay');
       return st;
     }
     default:

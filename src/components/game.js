@@ -17,6 +17,11 @@ class Game extends React.Component {
   render() {
     const st = this.props;
     const UserCookie = cookie.load('userId');
+    const typePlayCookie = cookie.load('typePlay');
+    if (!typePlayCookie || st.isOptions) {
+      return <Redirect to="/options" />;
+    }
+    st.SetTypePlay();
     if (st.image) {
       this.imagesrc = types.stringConnect + st.image;
     }
@@ -43,7 +48,7 @@ class Game extends React.Component {
     // move: danh sách mảng 123456..
     const moves = history.map((step, move) => {
       const desc = move // desc lưu "go to move ..."
-        ? `Go to move [${st.col[move]}][${st.row[move].toString()}]`
+        ? `Go to move [${st.row[move]}][${st.col[move].toString()}]`
         : 'Go to game start';
       return (
         <li key={move}>
@@ -78,7 +83,7 @@ class Game extends React.Component {
     } else {
       status = `Next step: ${st.xIsNext ? 'X' : 'O'}`;
     }
-    // giao diện
+    // ==========giao diện============
     return (
       <div className="game">
         <Card
@@ -113,84 +118,92 @@ class Game extends React.Component {
           }}
         >
           <div>
-            <Button
-              style={{
-                marginLeft: '400px',
-                background: 'rgb(255, 100, 110,0.8)'
-              }}
-              className="logoutButton"
-              variant="contained"
-              color="secondary"
-              type="button"
-              onClick={event => {
-                event.preventDefault();
-                st.Logout();
-              }}
-            >
-              Log out
-            </Button>
-            <br />
-            <center>
-              <RoundImg
-                imageWidth="150"
-                imageHeight="150"
-                roundedColor="white"
-                image={this.imagesrc}
-              />
-            </center>
-            <br />
-            <div className="Username">
-              Player :{' '}
+            <div>
               <Button
-                type="button"
                 style={{
-                  background: 'rgba(240, 160, 160, 0.4)',
-                  height: '34px '
+                  textAlign: 'left',
+                  float: 'left'
                 }}
+                className="logoutButton"
+                color="secondary"
+                type="button"
                 onClick={event => {
                   event.preventDefault();
-                  // st.Login(st.username, st.password);
-                  // st.GetUserRequest(cookie.load('userId'));
-                  st.Info();
+                  st.IsOptionsPage();
                 }}
               >
-                <h4>{st.name}</h4>
+                &lt; Options
+              </Button>
+              <Button
+                style={{
+                  textAlign: 'right',
+                  float: 'right'
+                }}
+                className="logoutButton"
+                color="secondary"
+                type="button"
+                onClick={event => {
+                  event.preventDefault();
+                  st.Logout();
+                }}
+              >
+                Log out &gt;
               </Button>
             </div>
             <br />
-            <div>
-              <h4>{status}</h4>
+            <div className="divAvatar">
+              <RoundImg
+                imageWidth="50"
+                imageHeight="50"
+                roundedSize="0"
+                roundedColor="white"
+                image={this.imagesrc}
+              />
+              <Button
+                type="button"
+                style={{
+                  height: '30px ',
+                  fontSize: '20px',
+                  margin: '0px 0px 50px 0px'
+                }}
+                onClick={event => {
+                  event.preventDefault();
+                  st.Info();
+                }}
+              >
+                {st.name}
+              </Button>
             </div>
-            <br />
-            <Button
+            <Card
               style={{
-                background: 'rgb(255, 100, 110,0.8)',
-                color: '#fff',
-                margin: '10px 0px 10px 23px'
+                margin: '10px 10px 10px 10px',
+                padding: '15px',
+                height: '515px',
+                background: 'white'
               }}
-              variant="contained"
-              color="secondary"
-              type="button"
-              className="buttonSort"
-              onClick={() => st.sortClick()}
             >
-              {Sortvalue}
-            </Button>
-            <Button
-              style={{
-                background: 'rgb(255, 100, 110,0.8)',
-                color: '#fff',
-                margin: '10px 0px 10px 23px'
-              }}
-              variant="contained"
-              color="secondary"
-              type="button"
-              className="buttonSort"
-              onClick={() => st.MachinePlayClick()}
-            >
-              {st.isMachinePlay}
-            </Button>
-            <ol>{moves}</ol>
+              <div>
+                <h4>{status}</h4>
+              </div>
+              <br />
+              <Button
+                style={{
+                  background: 'rgb(255, 100, 110,0.8)',
+                  color: '#fff',
+                  margin: '10px 0px 10px 23px'
+                }}
+                variant="contained"
+                color="secondary"
+                type="button"
+                className="buttonSort"
+                onClick={() => st.sortClick()}
+              >
+                {Sortvalue}
+              </Button>
+              <div style={{ overflow: 'auto', height: '400px' }}>
+                <ol>{moves}</ol>
+              </div>
+            </Card>
           </div>
         </Card>
       </div>

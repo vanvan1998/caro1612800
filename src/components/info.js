@@ -1,20 +1,11 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import InfoSharpIcon from '@material-ui/icons/InfoSharp';
-import Container from '@material-ui/core/Container';
 import '../App.css';
 import { Redirect } from 'react-router-dom';
 import cookie from 'react-cookies';
 import FormData from 'form-data';
 import RoundImg from 'react-rounded-image';
-// import { Select } from 'antd';
 import * as types from '../constants/constants';
-
-// const { Option } = Select;
 
 export default class Info extends React.PureComponent {
   constructor() {
@@ -79,184 +70,166 @@ export default class Info extends React.PureComponent {
     if (st.isGame) {
       st.NoPlayGame();
       st.NoInfo();
-      return <Redirect to="/game" />;
+      return <Redirect to="/options" />;
     }
     return (
-      <div className="Info">
-        <div className="UserImage">
-          <RoundImg
-            imageWidth="400"
-            imageHeight="400"
-            roundedColor="white"
-            image={this.imagesrc}
-          />
-          <div className="UploadImage">
-            <Grid item xs={12} sm={10}>
-              <input
-                className="InputImage"
-                type="file"
-                onChange={this.fileSelectedHandler}
+      <div className="page-wrapper bg-gra-01 p-t-50 p-b-50 font-poppins">
+        <div className="wrapper wrapper--w900">
+          <div className="card card-3 cardInfo p-l-50 p-r-50">
+            <div className="UserImage">
+              <RoundImg
+                imageWidth="350"
+                imageHeight="350"
+                roundedColor="white"
+                image={this.imagesrc}
               />
-            </Grid>
-            <Grid item xs={12} sm={2}>
-              <Button
-                type="button"
-                variant="contained"
-                color="secondary"
-                style={{
-                  background: 'rgb(255, 60, 80,0.8)'
-                }}
-                onClick={this.fileUploadHandler}
-              >
-                UpLoad
-              </Button>
-            </Grid>
-          </div>
-        </div>
-        <div className="InfoLayout">
-          <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className="paper">
-              <center>
-                <InfoSharpIcon className="Icon" style={{ fontSize: 50 }} />
-                <Typography component="h1" variant="h5">
-                  Infomation
-                </Typography>
-              </center>
-              <form className="form" noValidate>
-                <Grid container spacing={2}>
-                  <Grid item xs={12}>
-                    <TextField
-                      name="Name"
-                      variant="outlined"
-                      required
-                      fullWidth
-                      id="Name"
-                      onChange={event => {
-                        this.name = event.target.value;
-                      }}
-                      label="Full Name"
-                      defaultValue={this.name}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      variant="outlined"
-                      fullWidth
-                      id="DateOfBirth"
-                      label="Date Of Birth"
-                      onChange={event => {
-                        this.dateOfBirth = event.target.value;
-                      }}
-                      name="DateOfBirth"
-                      defaultValue={this.dateOfBirth}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={12}>
-                    {/* <Select defaultValue={this.sex}>
-                      <Option value="nữ">nữ</Option>
-                      <Option value="nam">nam</Option>
-                    </Select> */}
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      variant="outlined"
-                      fullWidth
-                      id="sex"
-                      label="Sex"
-                      onChange={event => {
-                        this.sex = event.target.value;
-                      }}
-                      name="sex"
-                      defaultValue={this.sex}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      variant="outlined"
-                      required
-                      fullWidth
-                      id="username1"
-                      label="Username"
-                      name="username1"
-                      value={this.username}
-                      autoComplete="aaaaa"
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      variant="outlined"
-                      fullWidth
-                      id="email"
-                      onChange={event => {
-                        this.email = event.target.value;
-                      }}
-                      label="Email Address"
-                      name="email"
-                      defaultValue={this.email}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      variant="outlined"
-                      fullWidth
-                      onChange={event => {
-                        this.password = event.target.value;
-                      }}
-                      name="abcpassword"
-                      label="Password"
-                      type="password"
-                      id="abcpassword"
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      variant="outlined"
-                      required
-                      fullWidth
-                      onChange={event => {
-                        this.confirmPassword = event.target.value;
-                      }}
-                      name="confirmPassword"
-                      label="Conform Password"
-                      type="password"
-                      id="confirmPassword"
-                    />
-                  </Grid>
-                </Grid>
-                <div className="ErrorRegister">{this.err}</div>
-                <div className="GridForm">
-                  <Button
-                    fullWidth
+              <div className="UploadImage">
+                <input
+                  className="InputImage"
+                  type="file"
+                  onChange={this.fileSelectedHandler}
+                />
+                <center>
+                  <button
+                    className="btn btn--pill"
+                    type="button"
                     variant="contained"
                     color="secondary"
                     style={{
-                      margin: '10px 0px 0px 0px',
-                      background: 'rgb(255, 60, 80,0.8)'
+                      background: 'rgb(255, 60, 80,0.8)',
+                      margin: '10px 43px 0px 0px'
                     }}
-                    onClick={event => {
-                      event.preventDefault();
-                      st.UpdateUser(
-                        st.id,
-                        this.username,
-                        this.name,
-                        this.email,
-                        this.dateOfBirth,
-                        this.sex,
-                        this.password,
-                        this.confirmPassword,
-                        cookie.load('userId')
-                      );
-                    }}
+                    onClick={this.fileUploadHandler}
                   >
-                    Update
-                  </Button>
+                    UpLoad
+                  </button>
+                </center>
+              </div>
+            </div>
+            {/* <div className="card-heading" /> */}
+            <div className="card-body">
+              <center>
+                <h2 className="title">Info</h2>
+              </center>
+              <form method="POST">
+                <div className="input-group">
+                  <input
+                    className="input--style-3"
+                    type="text"
+                    placeholder="Name"
+                    name="name"
+                    onChange={event => {
+                      this.name = event.target.value;
+                    }}
+                    defaultValue={this.name}
+                  />
                 </div>
-                <Grid container justify="flex-end">
-                  <Grid item>
+                <div className="input-group">
+                  <input
+                    className="input--style-3"
+                    type="text"
+                    placeholder="Birth date"
+                    name="birthday"
+                    onChange={event => {
+                      this.dateOfBirth = event.target.value;
+                    }}
+                    defaultValue={this.dateOfBirth}
+                  />
+                </div>
+                <div className="input-group">
+                  <div className="rsselect2">
+                    <select
+                      className="rsselect2"
+                      name="gender"
+                      onChange={event => {
+                        this.sex = event.target.value;
+                      }}
+                      defaultValue={this.sex}
+                    >
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </select>
+                    <div className="select-dropdown" />
+                  </div>
+                </div>
+                <div className="input-group">
+                  <input
+                    className="input--style-3"
+                    type="username"
+                    placeholder="Username"
+                    name="Username"
+                    onChange={event => {
+                      this.username = event.target.value;
+                    }}
+                    value={this.username}
+                  />
+                </div>
+                <div className="input-group">
+                  <input
+                    className="input--style-3"
+                    type="email"
+                    placeholder="Email"
+                    name="email"
+                    onChange={event => {
+                      this.email = event.target.value;
+                    }}
+                    defaultValue={this.email}
+                  />
+                </div>
+                <div className="input-group">
+                  <input
+                    className="input--style-3"
+                    type="password"
+                    placeholder="Password"
+                    name="Pass"
+                    onChange={event => {
+                      this.password = event.target.value;
+                    }}
+                  />
+                </div>
+                <div className="input-group">
+                  <input
+                    className="input--style-3"
+                    type="password"
+                    placeholder="Confirm Password"
+                    name="ConfirmPass"
+                    onChange={event => {
+                      this.confirmPassword = event.target.value;
+                    }}
+                  />
+                </div>
+                <div className="ErrorRegister">{this.err}</div>
+                <center>
+                  <div className="p-t-10">
+                    <button
+                      className="btn btn--pill"
+                      type="button"
+                      onClick={event => {
+                        event.preventDefault();
+                        st.UpdateUser(
+                          st.id,
+                          this.username,
+                          this.name,
+                          this.email,
+                          this.dateOfBirth,
+                          this.sex,
+                          this.password,
+                          this.confirmPassword,
+                          cookie.load('userId')
+                        );
+                      }}
+                      style={{
+                        background: 'rgb(255, 60, 80,0.8)'
+                      }}
+                    >
+                      Update
+                    </button>
+                  </div>
+                  <div className="divtologin">
                     <Button
                       type="button"
-                      style={{ margin: '-30px 0px 0px 0px', color: 'blue' }}
+                      style={{ color: 'blue' }}
                       onClick={event => {
                         event.preventDefault();
                         // st.Login(st.username, st.password);
@@ -266,11 +239,11 @@ export default class Info extends React.PureComponent {
                     >
                       Play game
                     </Button>
-                  </Grid>
-                </Grid>
+                  </div>
+                </center>
               </form>
             </div>
-          </Container>
+          </div>
         </div>
       </div>
     );

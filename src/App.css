@@ -15,7 +15,7 @@ ul {
   color: red;
 }
 
-.divtologin{
+.divtologin {
   margin-top: 20px;
 }
 
@@ -64,6 +64,10 @@ ul {
 .kbd-navigation .square:focus {
   background: #ddd;
 }
+
+/* .wrapper--height800{
+  max-height: 400px;
+} */
 
 .buttonSort {
   margin-left: 23px;
@@ -126,10 +130,63 @@ ul {
 }
 
 .UserImage {
-  margin: 110px 130px 0px 215px;
+  display: inline;
+  padding: 50px 0px 50px 100px;
 }
 
 .UploadImage {
   margin: 30px 0px 0px 0px;
+  padding: 0px 60px 0px 40px;
   font-size: 18px;
+}
+
+.cardInfo {
+  display: inline-flexbox;
+}
+
+.wrapper--w900 {
+  max-width: 900px;
+}
+
+.InputImage {
+  color: rgb(0, 0, 0);
+}
+
+.SpanOptions {
+  display: block;
+  font-family: Poppins-Bold;
+  font-size: 30px;
+  color: #333333;
+  line-height: 0.5;
+  text-align: left;
+}
+
+.OptionsPage {
+  background-image: url(https://media.giphy.com/media/kg19fN5BXbZGIDznzG/giphy.gif);
+  width: 100%;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.btn-options-bottom {
+  margin: 0px 10px 50px 110px;
+}
+
+.btn-options-top {
+  margin: -20px 10px 20px 110px;
+}
+
+.divAvatar {
+  display: inline-flex;
 }

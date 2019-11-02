@@ -33,8 +33,14 @@ export const getUser = 'GETUSER';
 
 export const isMachinePlay = 'MACHINEPLAY';
 
+export const isNomalPlay = 'NOMALPLAY';
+
+export const setTypePlay = 'SETTYPEPLAY';
+
 export const uploadImage = 'UPLOADIMAGE';
 
 export const noStatusImage = 'NOSTATUSIMAGE';
 
 export const loginWithFacebook = 'LOGINWITHFACEBOOK';
+
+export const isOptionsPage = 'ISOPTIONSPAGE';

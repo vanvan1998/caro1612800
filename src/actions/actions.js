@@ -15,6 +15,24 @@ export const IsMachinePlay = () => {
   };
 };
 
+export const IsNomalPlay = () => {
+  return {
+    type: types.isNomalPlay
+  };
+};
+
+export const SetTypePlay = () => {
+  return {
+    type: types.setTypePlay
+  };
+};
+
+export const IsOptionsPage = () => {
+  return {
+    type: types.isOptionsPage
+  };
+};
+
 export const NoStatusImage = () => {
   return {
     type: types.noStatusImage

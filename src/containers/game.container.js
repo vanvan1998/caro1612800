@@ -20,7 +20,8 @@ const mapStateToProps = state => {
     password: InfoState.password,
     isInfo: GameState.isInfo,
     isMachinePlay: GameState.isMachinePlay,
-    image: InfoState.image
+    image: InfoState.image,
+    isOptions: state.OptionsReducer.isOptions
   };
 };
 
@@ -29,27 +30,43 @@ const mapDispatchToProps = dispatch => {
     GetUserRequest: token => {
       dispatch(actions.GetUserRequest(token));
     },
+
     handleClick: (i, j) => {
       dispatch(actions.BoardClick(i, j));
     },
+
     jumpTo: step => {
       dispatch(actions.GoToMoveClick(step));
     },
+
     sortClick: () => {
       dispatch(actions.SortClick());
     },
+
     calculateWinner: squares => {
       dispatch(actions.CheckWinner(squares));
     },
+
     MachinePlayClick: () => {
       dispatch(actions.IsMachinePlay());
     },
+
+    IsOptionsPage: () => {
+      dispatch(actions.IsOptionsPage());
+    },
+
     Logout: () => {
       dispatch(actions.LogOut());
     },
+
     Info: () => {
       dispatch(actions.Info());
     },
+
+    SetTypePlay: () => {
+      dispatch(actions.SetTypePlay());
+    },
+
     Login: (username, password) => {
       dispatch(actions.LoginRequest(username, password));
     }

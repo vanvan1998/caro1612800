@@ -130,8 +130,11 @@ export default class SignUp extends React.PureComponent {
                 <center>
                   <div className="p-t-10">
                     <button
-                      className="btn btn--pill btn--green"
+                      className="btn btn--pill"
                       type="button"
+                      style={{
+                        background: 'rgb(255, 50, 70,0.8)'
+                      }}
                       onClick={event => {
                         event.preventDefault();
                         st.Register(
