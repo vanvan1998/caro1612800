@@ -15,6 +15,13 @@ const initialState = {
   isUpdate: ''
 };
 
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+  const expires = `expires=${d.toUTCString()}`;
+  document.cookie = `${cname}=${cvalue};${expires};path=/`;
+}
+
 const LoginReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.login: {
@@ -25,13 +32,14 @@ const LoginReducer = (state = initialState, action) => {
         st.token = action.data.res.data.token;
         st.name = action.data.res.data.userModified.name;
         st.image = action.data.res.data.userModified.userImage;
-        const expires = new Date();
-        expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
-        // cookie.save('userId', st.token, { path: '/' });
-        cookie.save('userId', st.token, {
-          path: '/',
-          expires
-        });
+        // const expires = new Date();
+        // expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
+        // // cookie.save('userId', st.token, { path: '/' });
+        // cookie.save('userId', st.token, {
+        //   path: '/',
+        //   expires
+        // });
+        setCookie('userId', st.token, 7);
         st.email = action.data.res.data.userModified.email;
         st.dateOfBirth = action.data.res.data.userModified.dateOfBirth;
         st.sex = action.data.res.data.userModified.sex;
@@ -79,7 +87,7 @@ const LoginReducer = (state = initialState, action) => {
         // eslint-disable-next-line no-underscore-dangle
         st.id = action.data.res.data.userModified._id;
         st.isLogin = true;
-        console.log(st);
+        // console.log(st);
       } catch (err) {
         st.token = 'err';
       }

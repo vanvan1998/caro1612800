@@ -11,7 +11,10 @@ import { Redirect } from 'react-router-dom';
 import cookie from 'react-cookies';
 import FormData from 'form-data';
 import RoundImg from 'react-rounded-image';
+// import { Select } from 'antd';
 import * as types from '../constants/constants';
+
+// const { Option } = Select;
 
 export default class Info extends React.PureComponent {
   constructor() {
@@ -25,7 +28,7 @@ export default class Info extends React.PureComponent {
     this.confirmPassword = '';
     this.err = '';
     this.fileImage = null;
-    this.imagesrc = `${types.stringConnect}/uploads/account.png`;
+    this.imagesrc = `${types.stringConnect}/uploads/default_avatar.png`;
   }
 
   fileSelectedHandler = event => {
@@ -148,6 +151,12 @@ export default class Info extends React.PureComponent {
                       name="DateOfBirth"
                       defaultValue={this.dateOfBirth}
                     />
+                  </Grid>
+                  <Grid item xs={12} sm={12}>
+                    {/* <Select defaultValue={this.sex}>
+                      <Option value="nữ">nữ</Option>
+                      <Option value="nam">nam</Option>
+                    </Select> */}
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <TextField

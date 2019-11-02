@@ -1,6 +1,5 @@
 body {
   font: 14px 'Century Gothic', Futura, sans-serif;
-  margin: 20px;
 }
 button {
   background: #3f51b5;
@@ -16,8 +15,12 @@ ul {
   color: red;
 }
 
+.divtologin{
+  margin-top: 20px;
+}
+
 .divRow {
-  display: block;
+  display: inline-block;
   margin-top: -4px;
 }
 
@@ -27,9 +30,6 @@ ul {
   display: table;
 }
 
-div {
-  display: inline-block;
-}
 .status {
   margin-bottom: 10px;
 }
@@ -62,7 +62,7 @@ div {
 }
 
 .kbd-navigation .square:focus {
-  background: #ddd ;
+  background: #ddd;
 }
 
 .buttonSort {
@@ -78,10 +78,6 @@ div {
   margin-top: 10px;
 }
 
-.logoutButton {
-  margin-left: 200px;
-}
-
 .game-info {
   min-height: 675px;
   min-width: 420px;
@@ -92,34 +88,12 @@ div {
   box-shadow: 10px 10px 10px 10px rgb(133, 131, 131);
 }
 
-.loginLayout {
-  margin: 0px 0px 0px 500px;
-}
-
 .InfoLayout {
   margin: -40px 0px 0px 0px;
 }
 
-.paper {
-  margin-top: 70px;
-  display: 'flex';
-  flex-direction: 'column';
-  align-items: 'center';
-}
 .avatar {
   margin: 10px 0px 10px 0px;
-}
-
-.form {
-  width: '100%';
-  margin-top: 10px;
-}
-.Remember {
-  margin: 5px 0px 5px;
-}
-
-.footer-login {
-  margin-top: 20px;
 }
 
 .Error {
@@ -143,7 +117,7 @@ div {
 }
 
 .ErrorRegister {
-  color: red;
+  color: rgb(255, 106, 106);
   margin: 20px 20px 0px 10px;
 }
 

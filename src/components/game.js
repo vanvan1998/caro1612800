@@ -11,7 +11,7 @@ import * as types from '../constants/constants';
 class Game extends React.Component {
   constructor() {
     super();
-    this.imagesrc = `${types.stringConnect}/uploads/account.png`;
+    this.imagesrc = `${types.stringConnect}/uploads/default_avatar.png`;
   }
 
   render() {
@@ -84,7 +84,8 @@ class Game extends React.Component {
         <Card
           style={{
             boxShadow: '3px 3px 5px 5px rgb(133, 131, 131)',
-            height: '675px'
+            height: '675px',
+            display: 'inline-block'
           }}
         >
           <div className="game-board">

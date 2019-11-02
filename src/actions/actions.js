@@ -321,7 +321,7 @@ export const GetUserRequest = token => {
 
 function OnclickUploadImage(formdata, token) {
   const res = axios
-    .post(`${types.stringConnect}/api/users/uploadImage`, formdata, {
+    .post(`${types.stringConnect}/api/uploads/image`, formdata, {
       headers: { Authorization: `bearer ${token}` }
     })
     .catch(error => {
@@ -346,7 +346,8 @@ export const UploadImageRequest = (formdata, token) => {
 };
 
 function OnclickLoginWithFacebook(accessToken, userID) {
-  const url = 'https://restful1612800.herokuapp.com/';
+  // const url = 'https://restful1612800.herokuapp.com';
+  const url = 'http://localhost:3000';
   const res = axios
     .post(`${url}/api/auth/login-with-facebook`, {
       accessToken,
