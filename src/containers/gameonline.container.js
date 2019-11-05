@@ -6,7 +6,7 @@ const mapStateToProps = state => {
   const GameState = state.GameReducer;
   const InfoState = state.LoginReducer;
   return {
-    history: GameState.history,
+    historyGame: GameState.historyGame,
     stepNumber: GameState.stepNumber,
     xIsNext: GameState.xIsNext,
     col: GameState.col,
@@ -18,7 +18,7 @@ const mapStateToProps = state => {
     token: state.LoginReducer.token,
     username: InfoState.username,
     password: InfoState.password,
-    isInfo: GameState.isInfo,
+    // isInfo: GameState.isInfo,
     isMachinePlay: GameState.isMachinePlay,
     image: InfoState.image,
     isOptions: state.OptionsReducer.isOptions,
@@ -60,9 +60,9 @@ const mapDispatchToProps = dispatch => {
       dispatch(actions.LogOut());
     },
 
-    Info: () => {
-      dispatch(actions.Info());
-    },
+    // Info: () => {
+    //   dispatch(actions.Info());
+    // },
 
     SetTypePlay: () => {
       dispatch(actions.SetTypePlay());

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import { Redirect } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import cookie from 'react-cookies';
@@ -36,17 +36,17 @@ class Game extends React.Component {
       }
     }
 
-    if (st.isInfo) {
-      return <Redirect to="/info" />;
-    }
-    const history = st.history.slice(0, st.stepNumber + 1);
-    const current = history[st.stepNumber];
+    // if (st.isInfo) {
+    //   return <Redirect to="/info" />;
+    // }
+    const historyGame = st.historyGame.slice(0, st.stepNumber + 1);
+    const current = historyGame[st.stepNumber];
     // temp[0] lưu giá trị i, temp[1] lưu giá trị j, temp[2] lưu giá trị loại đường thắng: 0:|; 1:--; 2:\; 3:/
     st.calculateWinner(current.squares);
     const { winner } = st;
     const { Sortvalue } = st;
     // move: danh sách mảng 123456..
-    const moves = history.map((step, move) => {
+    const moves = historyGame.map((step, move) => {
       const desc = move // desc lưu "go to move ..."
         ? `Go to move [${st.row[move]}][${st.col[move].toString()}]`
         : 'Go to game start';
@@ -168,8 +168,9 @@ class Game extends React.Component {
                   margin: '0px 0px 50px 0px'
                 }}
                 onClick={event => {
-                  event.preventDefault();
-                  st.Info();
+                  // event.preventDefault();
+                  // st.Info();
+                  st.history.push('/info');
                 }}
               >
                 {st.name}
@@ -212,4 +213,4 @@ class Game extends React.Component {
   }
 }
 
-export default Game;
+export default withRouter(Game);

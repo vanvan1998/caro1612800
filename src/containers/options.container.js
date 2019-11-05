@@ -11,7 +11,7 @@ const mapStateToProps = state => {
     username: InfoState.username,
     password: InfoState.password,
     image: InfoState.image,
-    isInfo: GameState.isInfo,
+    // isInfo: GameState.isInfo,
     typePlay: GameState.typePlay,
     isOptions: state.OptionsReducer.isOptions
   };
@@ -28,9 +28,9 @@ const mapDispatchToProps = dispatch => {
     Logout: () => {
       dispatch(actions.LogOut());
     },
-    Info: () => {
-      dispatch(actions.Info());
-    },
+    // Info: () => {
+    //   dispatch(actions.Info());
+    // },
     // play offine
     MachinePlayClick: () => {
       dispatch(actions.IsMachinePlay());

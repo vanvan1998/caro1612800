@@ -17,11 +17,11 @@ export const login = 'LOGIN';
 
 export const logOut = 'LOGOUT';
 
-export const info = 'INFO';
+// export const info = 'INFO';
 
-export const playGame = 'PLAYGAME';
+// export const playGame = 'PLAYGAME';
 
-export const noInfo = 'NOINFO';
+// export const noInfo = 'NOINFO';
 
 export const noUpdateUser = 'NOUPDATEUSER';
 

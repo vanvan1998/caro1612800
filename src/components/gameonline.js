@@ -2,7 +2,7 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import '../App.css';
-import { Redirect } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import cookie from 'react-cookies';
@@ -11,6 +11,14 @@ import RoundImg from 'react-rounded-image';
 import $ from 'jquery';
 import Board from './board';
 import * as types from '../constants/constants';
+
+$.fn.visible = function() {
+  return this.css('visibility', 'visible');
+};
+
+$.fn.display = function() {
+  return this.css('display', 'flex');
+};
 
 class GameOnline extends React.Component {
   constructor() {
@@ -68,26 +76,32 @@ class GameOnline extends React.Component {
               image: r.imagePlayer2
             };
           }
-          console.log('player2', player2);
-          if (player2) {
+          if (player2.name) {
+            $('#divPlayer2').visible();
+            $('#divPlayer2').display();
             $('#namePlayer2').html(player2.name);
-          }
-          if (player2) {
-            $('#imagePlayer2').attr('src', types.stringConnect + player2.image);
-          } else {
-            $('#imagePlayer2').attr(
-              'src',
-              `${types.stringConnect}/uploads/default_avatar.png`
-            );
+            if (player2.image) {
+              $('#imagePlayer2').attr(
+                'src',
+                types.stringConnect + player2.image
+              );
+            } else {
+              $('#imagePlayer2').attr(
+                'src',
+                `${types.stringConnect}/uploads/default_avatar.png`
+              );
+            }
           }
         } catch (err) {
           console.log(err);
         }
       });
-
       this.socket.on('server-send-new-message', function(msg) {
         $('#messages').append(
-          $('<li class="li-left li-online">').text(`${player2.name} : ${msg}`)
+          $('<div class="li-left li-name"></div>').text(`${player2.name}`)
+        );
+        $('#messages').append(
+          $('<div class="li-left li-online"></div>').text(`${msg}`)
         );
       });
 
@@ -98,13 +112,10 @@ class GameOnline extends React.Component {
   }
 
   buttonClickSend = () => {
-    const st = this.props;
     const message = { message: this.newMessage };
     this.socket.emit('client-send-message', message);
     $('#messages').append(
-      $('<li class="li-right li-online">').text(
-        `${this.newMessage} : ${st.name}`
-      )
+      $('<div class="li-right li-online"></div>').text(`${this.newMessage}`)
     );
     $('#inputMessages').val('');
   };
@@ -137,15 +148,15 @@ class GameOnline extends React.Component {
       }
     }
 
-    if (st.isInfo) {
-      return <Redirect to="/info" />;
-    }
-    const history = st.history.slice(0, st.stepNumber + 1);
-    const current = history[st.stepNumber];
+    // if (st.isInfo) {
+    //   return <Redirect to="/info" />;
+    // }
+    const historyGame = st.historyGame.slice(0, st.stepNumber + 1);
+    const current = historyGame[st.stepNumber];
     st.calculateWinner(current.squares);
     const { winner } = st;
     const { Sortvalue } = st;
-    const moves = history.map((step, move) => {
+    const moves = historyGame.map((step, move) => {
       const desc = move
         ? `Go to move [${st.row[move]}][${st.col[move].toString()}]`
         : 'Go to game start';
@@ -256,27 +267,18 @@ class GameOnline extends React.Component {
             <br />
             {/* ==================================avatar and name=========================================== */}
             <div className="divAvatar row">
-              <div className="col-md-6 row divAvatarPlayer1">
+              <div id="divPlayer2" className="col-md-6 row divAvatarPlayer2">
                 <img
                   id="imagePlayer2"
-                  className="col-md-2"
+                  className="col-md-3"
                   alt="Avatar"
                   style={{
-                    borderRadius: '40%',
-                    height: '50px',
-                    width: '50px',
-                    background: 'red'
+                    borderRadius: '50%',
+                    padding: 0,
+                    maxWidth: '45px',
+                    maxHeight: '45px'
                   }}
-                  // imageWidth="45"
-                  // imageHeight="45"
-                  // roundedSize="0"
-                  // roundedColor="white"
-                  src="http://localhost:3000/uploads/default_avatar.png"
                 />
-                {/* <image
-                  
-                  style={{ height: '30px', width: '30px' }}
-                /> */}
                 <Button
                   id="namePlayer2"
                   className="col-md-9"
@@ -287,16 +289,11 @@ class GameOnline extends React.Component {
                     margin: '0px 0px 50px 0px',
                     background: 'none'
                   }}
-                  onClick={event => {
-                    event.preventDefault();
-                    st.Info();
-                  }}
                 >
                   &nbsp;
                 </Button>
-                <div className="col-md-1" />
               </div>
-              <div className="col-md-6 row divAvatarPlayer2">
+              <div className="col-md-6 row divAvatarPlayer1">
                 <Button
                   className="col-md-9"
                   type="button"
@@ -306,15 +303,11 @@ class GameOnline extends React.Component {
                     margin: '0px 0px 50px 0px',
                     background: 'none'
                   }}
-                  onClick={event => {
-                    event.preventDefault();
-                    st.Info();
-                  }}
                 >
                   {st.name}
                 </Button>
                 <RoundImg
-                  className="col-md-2"
+                  className="col-md-3"
                   imageWidth="45"
                   imageHeight="45"
                   roundedSize="0"
@@ -383,4 +376,4 @@ class GameOnline extends React.Component {
   }
 }
 
-export default GameOnline;
+export default withRouter(GameOnline);

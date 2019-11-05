@@ -189,23 +189,23 @@ export const LogOut = () => {
   };
 };
 
-export const Info = () => {
-  return {
-    type: types.info
-  };
-};
+// export const Info = () => {
+//   return {
+//     type: types.info
+//   };
+// };
 
-export const PlayGame = () => {
-  return {
-    type: types.playGame
-  };
-};
+// export const PlayGame = () => {
+//   return {
+//     type: types.playGame
+//   };
+// };
 
-export const NoInfo = () => {
-  return {
-    type: types.noInfo
-  };
-};
+// export const NoInfo = () => {
+//   return {
+//     type: types.noInfo
+//   };
+// };
 
 function OnclickUpdateUser(
   id,

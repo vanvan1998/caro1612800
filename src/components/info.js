@@ -1,13 +1,13 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import '../App.css';
-import { Redirect } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import cookie from 'react-cookies';
 import FormData from 'form-data';
 import RoundImg from 'react-rounded-image';
 import * as types from '../constants/constants';
 
-export default class Info extends React.PureComponent {
+class Info extends React.PureComponent {
   constructor() {
     super();
     this.username = '';
@@ -68,12 +68,12 @@ export default class Info extends React.PureComponent {
       st.NoUpdateUser();
       this.err = st.isUpdate;
     }
-    if (st.isGame) {
-      console.log('info');
-      st.IsOptionsPage();
-      st.NoInfo();
-      return <Redirect to="/options" />;
-    }
+    // if (st.isGame) {
+    //   console.log('info');
+    //   st.NoInfo();
+    //   st.IsOptionsPage();
+    //   return <Redirect to="/options" />;
+    // }
     return (
       <div className="page-wrapper bg-gra-01 p-t-50 p-b-50 font-poppins">
         <div className="wrapper wrapper--w900">
@@ -234,7 +234,10 @@ export default class Info extends React.PureComponent {
                       style={{ color: 'blue' }}
                       onClick={event => {
                         event.preventDefault();
-                        st.IsGame();
+                        // st.IsGame();
+                        st.IsOptionsPage();
+                        //   return <Redirect to="/options" />;
+                        st.history.push('/options');
                       }}
                     >
                       Play game
@@ -249,3 +252,6 @@ export default class Info extends React.PureComponent {
     );
   }
 }
+
+export default withRouter(Info);
+

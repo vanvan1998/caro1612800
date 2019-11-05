@@ -1,17 +1,17 @@
 import * as types from '../constants/constants';
 
 const initialState = {
-  isGame: false,
+  // isGame: false,
   statusUploadImage: ''
 };
 
 const InfoReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.playGame: {
-      const st = { ...state };
-      st.isGame = true;
-      return st;
-    }
+    // case types.playGame: {
+    //   const st = { ...state };
+    //   st.isGame = true;
+    //   return st;
+    // }
     case types.noStatusImage: {
       const st = { ...state };
       st.statusUploadImage = '';

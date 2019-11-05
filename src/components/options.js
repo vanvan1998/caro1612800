@@ -3,10 +3,10 @@ import '../App.css';
 import RoundImg from 'react-rounded-image';
 import Button from '@material-ui/core/Button';
 import cookie from 'react-cookies';
-import { Redirect } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import * as types from '../constants/constants';
 
-export default class Options extends React.PureComponent {
+class Options extends React.PureComponent {
   constructor() {
     super();
     this.imagesrc = `${types.stringConnect}/uploads/default_avatar.png`;
@@ -39,9 +39,9 @@ export default class Options extends React.PureComponent {
     if (st.typePlay === 'Play with computer' || st.typePlay === 'Play nomal') {
       return <Redirect to="/game" />;
     }
-    if (st.isInfo) {
-      return <Redirect to="/info" />;
-    }
+    // if (st.isInfo) {
+    //   return <Redirect to="/info" />;
+    // }
     return (
       <div className="limiter">
         <div className="OptionsPage">
@@ -69,9 +69,10 @@ export default class Options extends React.PureComponent {
                   fontSize: '20px',
                   margin: '0px 0px 0px 0px'
                 }}
-                onClick={event => {
-                  event.preventDefault();
-                  st.Info();
+                onClick={() => {
+                  // event.preventDefault();
+                  // st.Info();
+                  st.history.push('/info');
                 }}
               >
                 {st.name}
@@ -167,3 +168,5 @@ export default class Options extends React.PureComponent {
     );
   }
 }
+
+export default withRouter(Options);

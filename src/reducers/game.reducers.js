@@ -1,14 +1,14 @@
 import cookie from 'react-cookies';
 import * as types from '../constants/constants';
 
-const history = [
+const historyGame = [
   {
     squares: Array.from(Array(20), () => new Array(20))
   }
 ];
 
 const initialState = {
-  history,
+  historyGame,
   stepNumber: 0,
   xIsNext: true,
   col: [0],
@@ -17,7 +17,7 @@ const initialState = {
   temp: [],
   winner: false,
   color: 'black',
-  isInfo: false,
+  // isInfo: false,
   typePlay: ''
 };
 
@@ -160,8 +160,8 @@ function calculateWinner(squares, state) {
 
 function MachinePlay(state) {
   const st = { ...state };
-  const historytemp = st.history.slice(0, st.stepNumber + 1);
-  const current = historytemp[historytemp.length - 1];
+  const historyGametemp = st.historyGame.slice(0, st.stepNumber + 1);
+  const current = historyGametemp[historyGametemp.length - 1];
   const squares = JSON.parse(JSON.stringify(current.squares));
 
   // tìm i,j
@@ -182,10 +182,10 @@ function MachinePlay(state) {
 
 function handleClick(i, j, state) {
   const st = { ...state };
-  const historytemp = st.history.slice(0, st.stepNumber + 1);
+  const historyGametemp = st.historyGame.slice(0, st.stepNumber + 1);
   const col = st.col.slice(0, st.stepNumber + 1);
   const row = st.row.slice(0, st.stepNumber + 1);
-  const current = historytemp[historytemp.length - 1];
+  const current = historyGametemp[historyGametemp.length - 1];
   const squares = JSON.parse(JSON.stringify(current.squares));
   const sttemp = calculateWinner(squares, st);
   if (sttemp.winner || squares[i][j]) {
@@ -194,12 +194,12 @@ function handleClick(i, j, state) {
 
   squares[i][j] = st.xIsNext ? 'X' : 'O';
 
-  st.history = historytemp.concat([
+  st.historyGame = historyGametemp.concat([
     {
       squares
     }
   ]);
-  st.stepNumber = historytemp.length;
+  st.stepNumber = historyGametemp.length;
   st.xIsNext = !st.xIsNext;
   st.col = col.concat(i + 1);
   st.row = row.concat(j + 1);
@@ -246,11 +246,11 @@ const GameReducer = (state = initialState, action) => {
     case types.sortClick: {
       return onclickSort(state.Sortvalue, state);
     }
-    case types.info: {
-      const st = { ...state };
-      st.isInfo = true;
-      return st;
-    }
+    // case types.info: {
+    //   const st = { ...state };
+    //   st.isInfo = true;
+    //   return st;
+    // }
     case types.logOut: {
       const st = { ...state };
       st.stepNumber = 0;
@@ -261,16 +261,16 @@ const GameReducer = (state = initialState, action) => {
       st.temp = [];
       st.winner = false;
       st.color = 'black';
-      st.isInfo = false;
+      // st.isInfo = false;
       st.typePlay = '';
       cookie.remove('typePlay', { path: '/' });
       return st;
     }
-    case types.noInfo: {
-      const st = { ...state };
-      st.isInfo = false;
-      return st;
-    }
+    // case types.noInfo: {
+    //   const st = { ...state };
+    //   st.isInfo = false;
+    //   return st;
+    // }
     case types.isOptionsPage: {
       const st = { ...state };
       st.typePlay = '';

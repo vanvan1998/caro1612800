@@ -13,7 +13,7 @@ const mapStateToProps = state => {
     isLogin: InfoState.isLogin,
     password: InfoState.password,
     id: InfoState.id,
-    isGame: state.InFoReducer.isGame,
+    // isGame: state.InFoReducer.isGame,
     isUpdate: InfoState.isUpdate,
     token: InfoState.token,
     statusUploadImage: state.InFoReducer.statusUploadImage,
@@ -23,15 +23,15 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    IsGame: () => {
-      dispatch(actions.PlayGame());
-    },
+    // IsGame: () => {
+    //   dispatch(actions.PlayGame());
+    // },
     IsOptionsPage: () => {
       dispatch(actions.IsOptionsPage());
     },
-    NoInfo: () => {
-      dispatch(actions.NoInfo());
-    },
+    // NoInfo: () => {
+    //   dispatch(actions.NoInfo());
+    // },
     NoUpdateUser: () => {
       dispatch(actions.NoUpdateUser());
     },
