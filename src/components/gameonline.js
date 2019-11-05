@@ -40,11 +40,11 @@ class GameOnline extends React.Component {
       messages: [{ id: 1, userId: 0, message: 'Hello' }],
       user: null
     };
-    this.roomNumber = '';
     cookie.remove('typePlay', { path: '/' });
   }
 
   UNSAFE_componentWillMount() {
+    // client chỉ cần gửi lệnh đánh lên server, nếu server cho phép đánh sẻ trả về i,j lúc này mới hiện nước đánh lên màn hình
     const state = this.props;
     let currentRoom = '';
     let player2 = null;
@@ -67,12 +67,13 @@ class GameOnline extends React.Component {
           sk.emit('client-play-now');
         }
       });
-
+      // ==============================có player2=======================================
       this.socket.on('server-send-room', function(r) {
         try {
-          $('#roomNumber').html('');
           currentRoom = r.room;
+          $('#roomNumber').html('');
           $('#roomNumber').append($('<h4>').text(`Room: ${currentRoom}`));
+          $('#roomNumber').append($('<h4>').text('Waiting competitor...'));
           if (r.namePlayer1 !== state.name) {
             player2 = {
               name: r.namePlayer1,
@@ -85,6 +86,8 @@ class GameOnline extends React.Component {
             };
           }
           if (player2.name) {
+            $('#roomNumber').html('');
+            $('#roomNumber').append($('<h4>').text(`Room: ${currentRoom}`));
             $('#divPlayer2').visible();
             $('#divPlayer2').display();
             $('#namePlayer2').html(player2.name);
@@ -103,6 +106,7 @@ class GameOnline extends React.Component {
             $('#buttonDraw').display();
             $('#buttonSurrender').visible();
             $('#buttonSurrender').display();
+            $('#gameBoard').visible();
           }
         } catch (err) {
           console.log(err);
@@ -118,7 +122,7 @@ class GameOnline extends React.Component {
           );
         } else {
           $('#messages').append(
-            $('<div class="li-right li-name"></div>').text(' ')
+            $('<div class="li-right width100"></div>').text(' ')
           );
           $('#messages').append(
             $('<div class="li-left li-online li-mess-server"></div>').text(
@@ -128,9 +132,6 @@ class GameOnline extends React.Component {
         }
       });
 
-      this.socket.on('server-enable-your-turn', function(turn) {
-        console.log('cho phép đánh', turn);
-      });
       this.socket.on('server-enable-your-turn', function(turn) {
         console.log('cho phép đánh', turn);
       });
@@ -148,13 +149,14 @@ class GameOnline extends React.Component {
   buttonClickSend = () => {
     const message = this.newMessage;
     this.socket.emit('client-send-message', message);
-    $('#messages').append($('<div class="li-right li-name"></div>').text(' '));
+    $('#messages').append($('<div class="li-right width100"></div>').text(' '));
     $('#messages').append(
       $('<div class="li-right li-online-send"></div>').text(
         `${this.newMessage}`
       )
     );
     $('#inputMessages').val('');
+    this.newMessage = ' ';
   };
 
   handleKeyPress = event => {
@@ -185,9 +187,6 @@ class GameOnline extends React.Component {
       }
     }
 
-    // if (st.isInfo) {
-    //   return <Redirect to="/info" />;
-    // }
     const historyGame = st.historyGame.slice(0, st.stepNumber + 1);
     const current = historyGame[st.stepNumber];
     st.calculateWinner(current.squares);
@@ -230,7 +229,7 @@ class GameOnline extends React.Component {
     } else {
       status = `Next step: ${st.xIsNext ? 'X' : 'O'}`;
     }
-    // ==========giao diện============
+    // =================================================giao diện============================================================
     return (
       <div className="gameonline">
         <Card
@@ -240,7 +239,7 @@ class GameOnline extends React.Component {
             display: 'inline-block'
           }}
         >
-          <div className="game-board">
+          <div className="game-board" id="gameBoard">
             <Board
               squares={current.squares}
               color={(i, j) => {
@@ -253,7 +252,11 @@ class GameOnline extends React.Component {
                 }
                 return 'black';
               }}
-              onClick={(i, j) => st.handleClick(i, j)}
+              onClick={(i, j) => {
+                const data = { i, j };
+                this.socket.emit('client-send-move', data);
+                // st.handleClick(i, j);
+              }}
             />
           </div>
         </Card>
@@ -265,24 +268,8 @@ class GameOnline extends React.Component {
           }}
         >
           <div>
-            {/* ==================================button exit and log out=========================================== */}
+            {/* ==================================button exit=========================================== */}
             <div>
-              {/* <Button
-                style={{
-                  textAlign: 'left',
-                  float: 'left'
-                }}
-                className="logoutButton"
-                color="secondary"
-                type="button"
-                onClick={event => {
-                  this.socket.disconnect();
-                  event.preventDefault();
-                  st.IsOptionsPage();
-                }}
-              >
-                &lt; Exit
-              </Button> */}
               <Button
                 style={{
                   textAlign: 'right',
@@ -331,40 +318,36 @@ class GameOnline extends React.Component {
                 </Button>
               </div>
               <div className="col-md-2">
-                <center>
-                  <button
-                    id="buttonDraw"
-                    type="button"
-                    className="btn-gameonline"
-                    variant="contained"
-                    color="secondary"
-                    style={{
-                      background: 'rgb(255, 60, 80,0.8)'
-                    }}
-                    onClick={() => {
-                      this.socket.emit('client-ask-draw-game');
-                      // $('#buttonDraw').hidden();
-                      // $('#buttonDraw').displayBlock();
-                    }}
-                  >
-                    Draw
-                  </button>
-                  <button
-                    id="buttonSurrender"
-                    type="button"
-                    className="btn-gameonline"
-                    variant="contained"
-                    color="secondary"
-                    style={{
-                      background: 'rgb(255, 60, 80,0.8)'
-                    }}
-                    onClick={() => {
-                      this.socket.emit('client-surrender');
-                    }}
-                  >
-                    Surrender
-                  </button>
-                </center>
+                <button
+                  id="buttonDraw"
+                  type="button"
+                  className="btn-gameonline"
+                  variant="contained"
+                  color="secondary"
+                  style={{
+                    background: 'rgb(255, 60, 80,0.8)'
+                  }}
+                  onClick={() => {
+                    this.socket.emit('client-ask-draw-game');
+                  }}
+                >
+                  Draw
+                </button>
+                <button
+                  id="buttonSurrender"
+                  type="button"
+                  className="btn-gameonline"
+                  variant="contained"
+                  color="secondary"
+                  style={{
+                    background: 'rgb(255, 60, 80,0.8)'
+                  }}
+                  onClick={() => {
+                    this.socket.emit('client-surrender');
+                  }}
+                >
+                  Surrender
+                </button>
               </div>
               <div className="col-md-5 row divAvatarPlayer1">
                 <Button
@@ -438,7 +421,8 @@ class GameOnline extends React.Component {
               <div>
                 <h4>{status}</h4>
                 <div id="roomNumber">
-                  <h4>Room: waiting...</h4>
+                  <h4>Waiting...</h4>
+                  <h4>Please reload the page if you wait a long time</h4>
                 </div>
               </div>
               <br />

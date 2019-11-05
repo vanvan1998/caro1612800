@@ -272,6 +272,11 @@ const GameReducer = (state = initialState, action) => {
       cookie.remove('typePlay', { path: '/' });
       return st;
     }
+    case types.setxIsNext: {
+      const st = { ...state };
+      st.xIsNext = !state.xIsNext;
+      return st;
+    }
     case types.isMachinePlay: {
       const st = jumpTo(0, state);
       st.typePlay = 'Play with computer';

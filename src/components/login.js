@@ -16,11 +16,15 @@ export default class SignIn extends React.Component {
     const { FB } = window;
     FB.login(
       response => {
-        const {
-          authResponse: { accessToken, userID }
-        } = response;
-        event.persist();
-        st.LoginWithFacebookRequest(accessToken, userID);
+        try {
+          const {
+            authResponse: { accessToken, userID }
+          } = response;
+          event.persist();
+          st.LoginWithFacebookRequest(accessToken, userID);
+        } catch (err) {
+          console.log('err');
+        }
       },
       { scope: 'public_profile, email' }
     );

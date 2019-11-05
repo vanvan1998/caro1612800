@@ -36,6 +36,7 @@ ul {
 
 .game-board {
   margin: 12px 5px 0px 5px;
+  visibility: hidden;
 }
 
 .square {
@@ -210,12 +211,12 @@ ul {
   width: 100%;
   margin-left: 0.5px;
 }
-.li-online-send{
+.li-online-send {
   max-width: 400px;
   background: rgb(250, 215, 215);
   min-height: 35px;
   padding: 5px 10px;
-  border-radius: 20px;
+  border-radius: 15px;
   margin-bottom: 5px;
   font-size: 18px;
   display: inline-block;
@@ -227,7 +228,7 @@ ul {
   background: rgb(250, 215, 215);
   min-height: 35px;
   padding: 5px 10px;
-  border-radius: 20px;
+  border-radius: 15px;
   margin-bottom: 10px;
   font-size: 18px;
   display: inline-block;
@@ -263,7 +264,7 @@ ul {
   font-size: 10px;
   margin-bottom: 2px;
   margin-left: 15px;
-  width: 90%;
+  width: 92%;
 }
 
 .imagePlayer2 {
@@ -291,19 +292,27 @@ ul {
   display: block;
   visibility: hidden;
   height: 50px;
-  font-size: 20px;
+  font-size: 19px;
 }
 
-.li-mess-server{
+.li-mess-server {
   background: #91a0f5;
 }
 
-#buttonDraw, #buttonSurrender{
+#buttonSurrender {
   display: block;
   visibility: hidden;
+  margin-top: 10px;
 }
 
-.width100{
-  width: 90%;
+#buttonDraw{
+  display: block;
+  visibility: hidden;
+  margin-top: 10px;
+  margin-left: 13px;
+}
+
+.width100 {
+  width: 100%;
   margin-bottom: 1px;
 }

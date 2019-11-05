@@ -13,7 +13,6 @@ class Options extends React.PureComponent {
   }
 
   render() {
-    console.log('options');
     const st = this.props;
     const UserCookie = cookie.load('token');
     if (st.image) {

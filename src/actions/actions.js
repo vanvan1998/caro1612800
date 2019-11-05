@@ -9,6 +9,12 @@ export const CheckWinner = squares => {
   };
 };
 
+export const SetxIsNext = () => {
+  return {
+    type: types.setxIsNext
+  };
+};
+
 export const IsMachinePlay = () => {
   return {
     type: types.isMachinePlay
