@@ -34,23 +34,24 @@ export default class Info extends React.PureComponent {
       fd.append('_id', st.id);
       fd.append('userImage', this.fileImage, this.fileImage.name);
       event.preventDefault();
-      st.UploadImageRequest(fd, cookie.load('userId'));
+      st.UploadImageRequest(fd, cookie.load('token'));
     }
   };
 
   render() {
+    console.log('options111111111111');
     const st = this.props;
     this.username = st.username;
     this.name = st.name;
     this.email = st.email;
     this.dateOfBirth = st.dateOfBirth;
     this.sex = st.sex;
-    const UserCookie = cookie.load('userId');
+    const UserCookie = cookie.load('token');
     if (st.image) {
       this.imagesrc = types.stringConnect + st.image;
     }
     if (UserCookie && this.username === '') {
-      st.GetUserRequest(cookie.load('userId'));
+      st.GetUserRequest(cookie.load('token'));
       return <Redirect to="/info" />;
     }
     if (!st.isLogin) {
@@ -59,7 +60,7 @@ export default class Info extends React.PureComponent {
 
     if (st.statusUploadImage !== '') {
       st.NoStatusImage();
-      st.GetUserRequest(cookie.load('userId'));
+      st.GetUserRequest(cookie.load('token'));
       return <Redirect to="/info" />;
     }
 
@@ -68,7 +69,8 @@ export default class Info extends React.PureComponent {
       this.err = st.isUpdate;
     }
     if (st.isGame) {
-      st.NoPlayGame();
+      console.log('info');
+      st.IsOptionsPage();
       st.NoInfo();
       return <Redirect to="/options" />;
     }
@@ -216,7 +218,7 @@ export default class Info extends React.PureComponent {
                           this.sex,
                           this.password,
                           this.confirmPassword,
-                          cookie.load('userId')
+                          cookie.load('token')
                         );
                       }}
                       style={{
@@ -232,8 +234,6 @@ export default class Info extends React.PureComponent {
                       style={{ color: 'blue' }}
                       onClick={event => {
                         event.preventDefault();
-                        // st.Login(st.username, st.password);
-                        // st.GetUserRequest(cookie.load('userId'));
                         st.IsGame();
                       }}
                     >

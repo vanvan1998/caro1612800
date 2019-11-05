@@ -21,8 +21,6 @@ export const info = 'INFO';
 
 export const playGame = 'PLAYGAME';
 
-export const noPlayGame = 'NOPLAYGAME';
-
 export const noInfo = 'NOINFO';
 
 export const noUpdateUser = 'NOUPDATEUSER';
@@ -34,6 +32,10 @@ export const getUser = 'GETUSER';
 export const isMachinePlay = 'MACHINEPLAY';
 
 export const isNomalPlay = 'NOMALPLAY';
+
+export const isCreateNewGame = 'CREATENEWGAME';
+
+export const isPlayNow = 'isPlayNow';
 
 export const setTypePlay = 'SETTYPEPLAY';
 

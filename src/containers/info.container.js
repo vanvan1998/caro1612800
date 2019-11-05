@@ -26,8 +26,8 @@ const mapDispatchToProps = dispatch => {
     IsGame: () => {
       dispatch(actions.PlayGame());
     },
-    NoPlayGame: () => {
-      dispatch(actions.NoPlayGame());
+    IsOptionsPage: () => {
+      dispatch(actions.IsOptionsPage());
     },
     NoInfo: () => {
       dispatch(actions.NoInfo());

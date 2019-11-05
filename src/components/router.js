@@ -6,6 +6,7 @@ import RegisterContainer from '../containers/register.container';
 import InfoContainer from '../containers/info.container';
 import RuleContainer from '../containers/rule.containers';
 import OptionsContainer from '../containers/options.container';
+import GameOnlineContainer from '../containers/gameonline.container';
 
 export default function App() {
   return (
@@ -14,6 +15,9 @@ export default function App() {
         <Switch>
           <Route path="/info">
             <InfoContainer />
+          </Route>
+          <Route path="/gameonline">
+            <GameOnlineContainer />
           </Route>
           <Route path="/rule">
             <RuleContainer />

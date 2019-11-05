@@ -13,13 +13,14 @@ export default class Options extends React.PureComponent {
   }
 
   render() {
+    console.log('options');
     const st = this.props;
-    const UserCookie = cookie.load('userId');
+    const UserCookie = cookie.load('token');
     if (st.image) {
       this.imagesrc = types.stringConnect + st.image;
     }
     if (UserCookie && st.name === '') {
-      st.GetUserRequest(cookie.load('userId'));
+      st.GetUserRequest(cookie.load('token'));
     } else {
       if (st.token === 'err') {
         return <Redirect to="/" />;
@@ -32,10 +33,10 @@ export default class Options extends React.PureComponent {
       st.IsOptionsPage();
     }
 
-    if (st.typePlay === 'Play nomal') {
-      return <Redirect to="/game" />;
+    if (st.typePlay === 'Create new game' || st.typePlay === 'Play now') {
+      return <Redirect to="/gameonline" />;
     }
-    if (st.typePlay === 'Play with computer') {
+    if (st.typePlay === 'Play with computer' || st.typePlay === 'Play nomal') {
       return <Redirect to="/game" />;
     }
     if (st.isInfo) {
@@ -88,6 +89,10 @@ export default class Options extends React.PureComponent {
                   style={{
                     background: 'rgb(255, 60, 80,0.8)'
                   }}
+                  onClick={event => {
+                    event.preventDefault();
+                    st.IsPlayNow();
+                  }}
                 >
                   Play now
                 </button>
@@ -99,6 +104,10 @@ export default class Options extends React.PureComponent {
                   color="secondary"
                   style={{
                     background: 'rgb(255, 60, 80,0.8)'
+                  }}
+                  onClick={event => {
+                    event.preventDefault();
+                    st.IsCreateNewGame();
                   }}
                 >
                   Create new room

@@ -21,6 +21,18 @@ export const IsNomalPlay = () => {
   };
 };
 
+export const IsCreateNewGame = () => {
+  return {
+    type: types.isCreateNewGame
+  };
+};
+
+export const IsPlayNow = () => {
+  return {
+    type: types.isPlayNow
+  };
+};
+
 export const SetTypePlay = () => {
   return {
     type: types.setTypePlay
@@ -186,12 +198,6 @@ export const Info = () => {
 export const PlayGame = () => {
   return {
     type: types.playGame
-  };
-};
-
-export const NoPlayGame = () => {
-  return {
-    type: types.noPlayGame
   };
 };
 

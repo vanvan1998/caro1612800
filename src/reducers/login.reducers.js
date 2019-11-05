@@ -32,7 +32,7 @@ const LoginReducer = (state = initialState, action) => {
         st.token = action.data.res.data.token;
         st.name = action.data.res.data.userModified.name;
         st.image = action.data.res.data.userModified.userImage;
-        setCookie('userId', st.token, 7);
+        setCookie('token', st.token, 7);
         st.email = action.data.res.data.userModified.email;
         st.dateOfBirth = action.data.res.data.userModified.dateOfBirth;
         st.sex = action.data.res.data.userModified.sex;
@@ -68,20 +68,13 @@ const LoginReducer = (state = initialState, action) => {
         st.token = action.data.res.data.token;
         st.name = action.data.res.data.userModified.name;
         st.image = action.data.res.data.userModified.userImage;
-        // const expires = new Date();
-        // expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
-        // cookie.save('userId', st.token, {
-        //   path: '/',
-        //   expires
-        // });
-        setCookie('userId', st.token, 7);
+        setCookie('token', st.token, 7);
         st.email = action.data.res.data.userModified.email;
         st.dateOfBirth = action.data.res.data.userModified.dateOfBirth;
         st.sex = action.data.res.data.userModified.sex;
         // eslint-disable-next-line no-underscore-dangle
         st.id = action.data.res.data.userModified._id;
         st.isLogin = true;
-        // console.log(st);
       } catch (err) {
         st.token = 'err';
       }
@@ -97,7 +90,8 @@ const LoginReducer = (state = initialState, action) => {
       st.dateOfBirth = '';
       st.sex = '';
       st.image = '';
-      cookie.remove('userId', { path: '/' });
+      cookie.remove('token', { path: '/' });
+      cookie.remove('typePlay', { path: '/' });
       return st;
     }
     case types.updateUser: {

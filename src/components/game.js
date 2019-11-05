@@ -16,7 +16,7 @@ class Game extends React.Component {
 
   render() {
     const st = this.props;
-    const UserCookie = cookie.load('userId');
+    const UserCookie = cookie.load('token');
     const typePlayCookie = cookie.load('typePlay');
     if (!typePlayCookie || st.isOptions) {
       return <Redirect to="/options" />;
@@ -26,7 +26,7 @@ class Game extends React.Component {
       this.imagesrc = types.stringConnect + st.image;
     }
     if (UserCookie && st.name === '') {
-      st.GetUserRequest(cookie.load('userId'));
+      st.GetUserRequest(cookie.load('token'));
     } else {
       if (st.token === 'err') {
         return <Redirect to="/" />;
@@ -150,6 +150,7 @@ class Game extends React.Component {
                 Log out &gt;
               </Button>
             </div>
+            <br />
             <br />
             <div className="divAvatar">
               <RoundImg

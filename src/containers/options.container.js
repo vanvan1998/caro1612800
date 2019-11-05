@@ -31,13 +31,21 @@ const mapDispatchToProps = dispatch => {
     Info: () => {
       dispatch(actions.Info());
     },
-
+    // play offine
     MachinePlayClick: () => {
       dispatch(actions.IsMachinePlay());
     },
 
     NomalPlayClick: () => {
       dispatch(actions.IsNomalPlay());
+    },
+    // play online
+    IsCreateNewGame: () => {
+      dispatch(actions.IsCreateNewGame());
+    },
+
+    IsPlayNow: () => {
+      dispatch(actions.IsPlayNow());
     }
   };
 };

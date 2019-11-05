@@ -12,11 +12,6 @@ const InfoReducer = (state = initialState, action) => {
       st.isGame = true;
       return st;
     }
-    case types.noPlayGame: {
-      const st = { ...state };
-      st.isGame = false;
-      return st;
-    }
     case types.noStatusImage: {
       const st = { ...state };
       st.statusUploadImage = '';

@@ -29,9 +29,9 @@ export default class SignIn extends React.Component {
 
   render() {
     const st = this.props;
-    const UserCookie = cookie.load('userId');
+    const UserCookie = cookie.load('token');
     if (UserCookie && !st.isLogin) {
-      st.GetUserRequest(cookie.load('userId'));
+      st.GetUserRequest(cookie.load('token'));
       return <Redirect to="/options" />;
     }
     if (st.isLogin) {

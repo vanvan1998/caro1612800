@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
-import Game from '../components/game';
+import GameOnline from '../components/gameonline';
 
 const mapStateToProps = state => {
   const GameState = state.GameReducer;
@@ -21,7 +21,8 @@ const mapStateToProps = state => {
     isInfo: GameState.isInfo,
     isMachinePlay: GameState.isMachinePlay,
     image: InfoState.image,
-    isOptions: state.OptionsReducer.isOptions
+    isOptions: state.OptionsReducer.isOptions,
+    id: InfoState.id
   };
 };
 
@@ -68,9 +69,9 @@ const mapDispatchToProps = dispatch => {
     }
   };
 };
-const GameContainer = connect(
+const GameOnlineContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Game);
+)(GameOnline);
 
-export default GameContainer;
+export default GameOnlineContainer;

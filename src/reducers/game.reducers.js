@@ -293,6 +293,22 @@ const GameReducer = (state = initialState, action) => {
       });
       return st;
     }
+    case types.isCreateNewGame: {
+      const st = jumpTo(0, state);
+      st.typePlay = 'Create new game';
+      cookie.save('typePlay', st.typePlay, {
+        path: '/'
+      });
+      return st;
+    }
+    case types.isPlayNow: {
+      const st = jumpTo(0, state);
+      st.typePlay = 'Play now';
+      cookie.save('typePlay', st.typePlay, {
+        path: '/'
+      });
+      return st;
+    }
     case types.setTypePlay: {
       const st = { ...state };
       st.typePlay = cookie.load('typePlay');
