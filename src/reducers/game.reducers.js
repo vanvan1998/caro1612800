@@ -246,11 +246,6 @@ const GameReducer = (state = initialState, action) => {
     case types.sortClick: {
       return onclickSort(state.Sortvalue, state);
     }
-    // case types.info: {
-    //   const st = { ...state };
-    //   st.isInfo = true;
-    //   return st;
-    // }
     case types.logOut: {
       const st = { ...state };
       st.stepNumber = 0;
@@ -261,16 +256,10 @@ const GameReducer = (state = initialState, action) => {
       st.temp = [];
       st.winner = false;
       st.color = 'black';
-      // st.isInfo = false;
       st.typePlay = '';
       cookie.remove('typePlay', { path: '/' });
       return st;
     }
-    // case types.noInfo: {
-    //   const st = { ...state };
-    //   st.isInfo = false;
-    //   return st;
-    // }
     case types.isOptionsPage: {
       const st = { ...state };
       st.typePlay = '';

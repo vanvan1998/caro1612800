@@ -20,6 +20,14 @@ $.fn.display = function() {
   return this.css('display', 'flex');
 };
 
+$.fn.hidden = function() {
+  return this.css('visibility', 'hidden');
+};
+
+$.fn.displayBlock = function() {
+  return this.css('display', 'block');
+};
+
 class GameOnline extends React.Component {
   constructor() {
     super();
@@ -97,22 +105,41 @@ class GameOnline extends React.Component {
         }
       });
       this.socket.on('server-send-new-message', function(msg) {
-        $('#messages').append(
-          $('<div class="li-left li-name"></div>').text(`${player2.name}`)
-        );
-        $('#messages').append(
-          $('<div class="li-left li-online"></div>').text(`${msg}`)
-        );
+        if (msg.owner === 'competitor') {
+          $('#messages').append(
+            $('<div class="li-left li-name"></div>').text(`${player2.name}`)
+          );
+          $('#messages').append(
+            $('<div class="li-left li-online"></div>').text(`${msg.message}`)
+          );
+        } else {
+          $('#messages').append(
+            $('<div class="li-left li-online li-mess-server"></div>').text(
+              `${msg.message}`
+            )
+          );
+        }
       });
 
       this.socket.on('server-enable-your-turn', function(turn) {
         console.log('cho phép đánh', turn);
       });
+      this.socket.on('server-enable-your-turn', function(turn) {
+        console.log('cho phép đánh', turn);
+      });
+      this.socket.on('competitor-want-a-draw-game', function() {
+        $('#notification').html('');
+        $('#notification').append(
+          $('<span>').text(`${player2.name} want a draw game?`)
+        );
+        $('#new-notification').visible();
+        $('#new-notification').display();
+      });
     }
   }
 
   buttonClickSend = () => {
-    const message = { message: this.newMessage };
+    const message = this.newMessage;
     this.socket.emit('client-send-message', message);
     $('#messages').append(
       $('<div class="li-right li-online"></div>').text(`${this.newMessage}`)
@@ -267,16 +294,16 @@ class GameOnline extends React.Component {
             <br />
             {/* ==================================avatar and name=========================================== */}
             <div className="divAvatar row">
-              <div id="divPlayer2" className="col-md-6 row divAvatarPlayer2">
+              <div id="divPlayer2" className="col-md-5 row divAvatarPlayer2">
                 <img
                   id="imagePlayer2"
-                  className="col-md-3"
+                  className="col-md-2"
                   alt="Avatar"
                   style={{
                     borderRadius: '50%',
                     padding: 0,
-                    maxWidth: '45px',
-                    maxHeight: '45px'
+                    maxWidth: '40px',
+                    maxHeight: '40px'
                   }}
                 />
                 <Button
@@ -285,7 +312,7 @@ class GameOnline extends React.Component {
                   type="button"
                   style={{
                     height: '30px ',
-                    fontSize: '15px',
+                    fontSize: '13px',
                     margin: '0px 0px 50px 0px',
                     background: 'none'
                   }}
@@ -293,13 +320,48 @@ class GameOnline extends React.Component {
                   &nbsp;
                 </Button>
               </div>
-              <div className="col-md-6 row divAvatarPlayer1">
+              <div className="col-md-2">
+                <center>
+                  <button
+                    id="buttonDraw"
+                    type="button"
+                    className="btn-gameonline"
+                    variant="contained"
+                    color="secondary"
+                    style={{
+                      background: 'rgb(255, 60, 80,0.8)'
+                    }}
+                    onClick={() => {
+                      this.socket.emit('client-ask-draw-game');
+                      // $('#buttonDraw').hidden();
+                      // $('#buttonDraw').displayBlock();
+                    }}
+                  >
+                    Draw
+                  </button>
+                  <button
+                    type="button"
+                    className="btn-gameonline"
+                    variant="contained"
+                    color="secondary"
+                    style={{
+                      background: 'rgb(255, 60, 80,0.8)'
+                    }}
+                    onClick={() => {
+                      this.socket.emit('client-surrender');
+                    }}
+                  >
+                    Surrender
+                  </button>
+                </center>
+              </div>
+              <div className="col-md-5 row divAvatarPlayer1">
                 <Button
                   className="col-md-9"
                   type="button"
                   style={{
                     height: '30px ',
-                    fontSize: '15px',
+                    fontSize: '13px',
                     margin: '0px 0px 50px 0px',
                     background: 'none'
                   }}
@@ -307,22 +369,58 @@ class GameOnline extends React.Component {
                   {st.name}
                 </Button>
                 <RoundImg
-                  className="col-md-3"
-                  imageWidth="45"
-                  imageHeight="45"
+                  className="col-md-2"
+                  imageWidth="40"
+                  imageHeight="40"
                   roundedSize="0"
                   roundedColor="white"
                   image={this.imagesrc}
                 />
               </div>
             </div>
+            <div id="new-notification">
+              <span id="notification"> </span>
+              <button
+                id="yes"
+                type="button"
+                onClick={() => {
+                  $('#new-notification').hidden();
+                  $('#new-notification').displayBlock();
+                  this.socket.emit('client-answer-draw-game', 'yes');
+                }}
+                className="btn-gameonline"
+                variant="contained"
+                color="secondary"
+                style={{
+                  background: 'rgb(255, 60, 80,0.8)'
+                }}
+              >
+                Yes
+              </button>
+              <button
+                id="no"
+                type="button"
+                className="btn-gameonline"
+                variant="contained"
+                color="secondary"
+                style={{
+                  background: 'rgb(255, 60, 80,0.8)'
+                }}
+                onClick={() => {
+                  $('#new-notification').hidden();
+                  $('#new-notification').displayBlock();
+                  this.socket.emit('client-answer-draw-game', 'no');
+                }}
+              >
+                No
+              </button>
+            </div>
             {/* ==================================chat box=========================================== */}
-
             <Card
               style={{
                 margin: '10px 10px 10px 10px',
                 padding: '15px',
-                height: '515px',
+                height: '465px',
                 background: 'white'
               }}
             >
@@ -333,7 +431,8 @@ class GameOnline extends React.Component {
                 </div>
               </div>
               <br />
-              <div style={{ overflow: 'auto', height: '375px' }}>
+              {/* =============================danh sách mess================================ */}
+              <div style={{ overflow: 'auto', height: '325px' }}>
                 <ul id="messages" />
               </div>
               {/* =============================message================================================= */}
