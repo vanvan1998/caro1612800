@@ -56,9 +56,9 @@ const mapDispatchToProps = dispatch => {
       dispatch(actions.IsOptionsPage());
     },
 
-    Logout: () => {
-      dispatch(actions.LogOut());
-    },
+    // Logout: () => {
+    //   dispatch(actions.LogOut());
+    // },
 
     // Info: () => {
     //   dispatch(actions.Info());

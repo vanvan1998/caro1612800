@@ -211,6 +211,12 @@ function jumpTo(step, state) {
 
   st.stepNumber = step;
   st.xIsNext = step % 2 === 0;
+  if (state.typePlay === 'Play with computer') {
+    if (!st.xIsNext) {
+      const temp = MachinePlay(st);
+      return handleClick(temp[0], temp[1], st);
+    }
+  }
   return st;
 }
 

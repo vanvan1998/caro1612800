@@ -99,6 +99,10 @@ class GameOnline extends React.Component {
                 `${types.stringConnect}/uploads/default_avatar.png`
               );
             }
+            $('#buttonDraw').visible();
+            $('#buttonDraw').display();
+            $('#buttonSurrender').visible();
+            $('#buttonSurrender').display();
           }
         } catch (err) {
           console.log(err);
@@ -113,6 +117,9 @@ class GameOnline extends React.Component {
             $('<div class="li-left li-online"></div>').text(`${msg.message}`)
           );
         } else {
+          $('#messages').append(
+            $('<div class="li-right li-name"></div>').text(' ')
+          );
           $('#messages').append(
             $('<div class="li-left li-online li-mess-server"></div>').text(
               `${msg.message}`
@@ -141,8 +148,11 @@ class GameOnline extends React.Component {
   buttonClickSend = () => {
     const message = this.newMessage;
     this.socket.emit('client-send-message', message);
+    $('#messages').append($('<div class="li-right li-name"></div>').text(' '));
     $('#messages').append(
-      $('<div class="li-right li-online"></div>').text(`${this.newMessage}`)
+      $('<div class="li-right li-online-send"></div>').text(
+        `${this.newMessage}`
+      )
     );
     $('#inputMessages').val('');
   };
@@ -257,7 +267,7 @@ class GameOnline extends React.Component {
           <div>
             {/* ==================================button exit and log out=========================================== */}
             <div>
-              <Button
+              {/* <Button
                 style={{
                   textAlign: 'left',
                   float: 'left'
@@ -272,7 +282,7 @@ class GameOnline extends React.Component {
                 }}
               >
                 &lt; Exit
-              </Button>
+              </Button> */}
               <Button
                 style={{
                   textAlign: 'right',
@@ -284,10 +294,10 @@ class GameOnline extends React.Component {
                 onClick={event => {
                   this.socket.disconnect();
                   event.preventDefault();
-                  st.Logout();
+                  st.IsOptionsPage();
                 }}
               >
-                Log out &gt;
+                Exit &gt;
               </Button>
             </div>
             <br />
@@ -340,6 +350,7 @@ class GameOnline extends React.Component {
                     Draw
                   </button>
                   <button
+                    id="buttonSurrender"
                     type="button"
                     className="btn-gameonline"
                     variant="contained"

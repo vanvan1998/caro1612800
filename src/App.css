@@ -210,7 +210,18 @@ ul {
   width: 100%;
   margin-left: 0.5px;
 }
-
+.li-online-send{
+  max-width: 400px;
+  background: rgb(250, 215, 215);
+  min-height: 35px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  margin-bottom: 5px;
+  font-size: 18px;
+  display: inline-block;
+  overflow: auto;
+  word-wrap: break-word;
+}
 .li-online {
   max-width: 400px;
   background: rgb(250, 215, 215);
@@ -285,4 +296,14 @@ ul {
 
 .li-mess-server{
   background: #91a0f5;
+}
+
+#buttonDraw, #buttonSurrender{
+  display: block;
+  visibility: hidden;
+}
+
+.width100{
+  width: 90%;
+  margin-bottom: 1px;
 }

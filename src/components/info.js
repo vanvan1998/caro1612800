@@ -39,7 +39,6 @@ class Info extends React.PureComponent {
   };
 
   render() {
-    console.log('options111111111111');
     const st = this.props;
     this.username = st.username;
     this.name = st.name;
@@ -254,4 +253,3 @@ class Info extends React.PureComponent {
 }
 
 export default withRouter(Info);
-

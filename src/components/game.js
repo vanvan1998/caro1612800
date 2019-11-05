@@ -167,7 +167,7 @@ class Game extends React.Component {
                   fontSize: '20px',
                   margin: '0px 0px 50px 0px'
                 }}
-                onClick={event => {
+                onClick={() => {
                   // event.preventDefault();
                   // st.Info();
                   st.history.push('/info');
