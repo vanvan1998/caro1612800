@@ -145,7 +145,7 @@ class SignIn extends React.Component {
                   >
                     <i className="fa fa-facebook" />
                   </button>
-                  <a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=515923430857-91lh880df1vo0ssqvk91ooup3dpsg5or.apps.googleusercontent.com&amp;redirect_uri=https://restful1612800.herokuapp.com/api/auth/login-with-google&amp;scope=profile email openid&amp;response_type=code&amp;access_type=offline&amp;include_granted_scopes=true">
+                  <a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=85060829453-4tlg5112hr3j0e3dsqh2mpufpmcme2ml.apps.googleusercontent.com&amp;redirect_uri=https://restful1612800.herokuapp.com/api/auth/login-with-google&amp;scope=profile email openid&amp;response_type=code&amp;access_type=offline&amp;include_granted_scopes=true">
                     <button type="button" className="login100-social-item bg3">
                       <i className="fa fa-google" />
                     </button>
