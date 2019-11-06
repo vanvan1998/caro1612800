@@ -377,8 +377,8 @@ export const UploadImageRequest = (formdata, token) => {
 };
 
 function OnclickLoginWithFacebook(accessToken, userID) {
-  // const url = 'https://restful1612800.herokuapp.com';
-  const url = 'http://localhost:3000';
+  const url = 'https://restful1612800.herokuapp.com';
+  // const url = 'http://localhost:3000';
   const res = axios
     .post(`${url}/api/auth/login-with-facebook`, {
       accessToken,
