@@ -1,7 +1,5 @@
-// https://restful1612800.herokuapp.com
-// http://localhost:3000
-// export const stringConnect = 'https://restful1612800.herokuapp.com';
-export const stringConnect = 'http://localhost:3000';
+export const stringConnect = 'https://restful1612800.herokuapp.com';
+// export const stringConnect = 'http://localhost:3000';
 
 export const boardClick = 'BOARD_CLICK';
 
@@ -16,12 +14,6 @@ export const register = 'REGISTER';
 export const login = 'LOGIN';
 
 export const logOut = 'LOGOUT';
-
-// export const info = 'INFO';
-
-// export const playGame = 'PLAYGAME';
-
-// export const noInfo = 'NOINFO';
 
 export const noUpdateUser = 'NOUPDATEUSER';
 
