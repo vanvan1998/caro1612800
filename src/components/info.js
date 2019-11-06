@@ -47,7 +47,12 @@ class Info extends React.PureComponent {
     this.sex = st.sex;
     const UserCookie = cookie.load('token');
     if (st.image) {
-      this.imagesrc = types.stringConnect + st.image;
+      const imageString = st.image;
+      if (imageString.indexOf('http') === 0) {
+        this.imagesrc = st.image;
+      } else {
+        this.imagesrc = types.stringConnect + st.image;
+      }
     }
     if (UserCookie && this.username === '') {
       st.GetUserRequest(cookie.load('token'));

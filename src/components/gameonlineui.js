@@ -90,7 +90,12 @@ class GameOnlineUi extends React.Component {
       return <Redirect to="/options" />;
     }
     if (st.image) {
-      this.imagesrc = types.stringConnect + st.image;
+      const imageString = st.image;
+      if (imageString.indexOf('http') === 0) {
+        this.imagesrc = st.image;
+      } else {
+        this.imagesrc = types.stringConnect + st.image;
+      }
     }
 
     if (UserCookie && st.name === '') {
