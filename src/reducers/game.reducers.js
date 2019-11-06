@@ -206,6 +206,31 @@ function handleClick(i, j, state) {
   return st;
 }
 
+function handleClickOnlineGame(i, j, symbol, state) {
+  const st = { ...state };
+  const historyGametemp = st.historyGame.slice(0, st.stepNumber + 1);
+  const col = st.col.slice(0, st.stepNumber + 1);
+  const row = st.row.slice(0, st.stepNumber + 1);
+  const current = historyGametemp[historyGametemp.length - 1];
+  const squares = JSON.parse(JSON.stringify(current.squares));
+  const sttemp = calculateWinner(squares, st);
+  if (sttemp.winner || squares[i][j]) {
+    return st;
+  }
+
+  squares[i][j] = symbol;
+
+  st.historyGame = historyGametemp.concat([
+    {
+      squares
+    }
+  ]);
+  st.stepNumber = historyGametemp.length;
+  st.col = col.concat(i + 1);
+  st.row = row.concat(j + 1);
+  return st;
+}
+
 function jumpTo(step, state) {
   const st = { ...state };
 
@@ -272,10 +297,13 @@ const GameReducer = (state = initialState, action) => {
       cookie.remove('typePlay', { path: '/' });
       return st;
     }
-    case types.setxIsNext: {
-      const st = { ...state };
-      st.xIsNext = !state.xIsNext;
-      return st;
+    case types.handleClickOnlineGame: {
+      return handleClickOnlineGame(
+        action.data.i,
+        action.data.j,
+        action.data.symbol,
+        state
+      );
     }
     case types.isMachinePlay: {
       const st = jumpTo(0, state);

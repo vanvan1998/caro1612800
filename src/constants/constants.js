@@ -47,4 +47,4 @@ export const loginWithFacebook = 'LOGINWITHFACEBOOK';
 
 export const isOptionsPage = 'ISOPTIONSPAGE';
 
-export const setxIsNext = 'XISNEXT';
+export const handleClickOnlineGame = 'HANDLECLICKONLINE';

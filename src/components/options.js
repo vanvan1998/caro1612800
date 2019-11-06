@@ -6,7 +6,7 @@ import cookie from 'react-cookies';
 import { withRouter, Redirect } from 'react-router-dom';
 import * as types from '../constants/constants';
 
-class Options extends React.PureComponent {
+class Options extends React.Component {
   constructor() {
     super();
     this.imagesrc = `${types.stringConnect}/uploads/default_avatar.png`;
@@ -16,7 +16,14 @@ class Options extends React.PureComponent {
     const st = this.props;
     const UserCookie = cookie.load('token');
     if (st.image) {
-      this.imagesrc = types.stringConnect + st.image;
+      const imageString = st.image;
+      console.log(imageString);
+      console.log(imageString.indexOf('http'));
+      if (imageString.indexOf('http') === 0) {
+        this.imagesrc = st.image;
+      } else {
+        this.imagesrc = types.stringConnect + st.image;
+      }
     }
     if (UserCookie && st.name === '') {
       st.GetUserRequest(cookie.load('token'));

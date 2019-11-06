@@ -25,20 +25,24 @@ function setCookie(cname, cvalue, exdays) {
 const LoginReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.login: {
+      console.log(action.data.res.data);
       const st = { ...state };
       st.username = action.data.username;
       st.password = action.data.password;
       try {
+        // eslint-disable-next-line no-underscore-dangle
+        st.id = action.data.res.data.userModified._id;
         st.token = action.data.res.data.token;
         st.name = action.data.res.data.userModified.name;
         st.image = action.data.res.data.userModified.userImage;
-        setCookie('token', st.token, 7);
         st.email = action.data.res.data.userModified.email;
         st.dateOfBirth = action.data.res.data.userModified.dateOfBirth;
         st.sex = action.data.res.data.userModified.sex;
-        // eslint-disable-next-line no-underscore-dangle
-        st.id = action.data.res.data.userModified._id;
         st.isLogin = true;
+        setCookie('token', action.data.res.data.token, 7);
+        // eslint-disable-next-line no-underscore-dangle
+        setCookie('id', action.data.res.data.userModified._id, 7);
+        setCookie('name', action.data.res.data.userModified.name, 7);
       } catch (err) {
         st.token = 'err';
       }
@@ -68,19 +72,23 @@ const LoginReducer = (state = initialState, action) => {
         st.token = action.data.res.data.token;
         st.name = action.data.res.data.userModified.name;
         st.image = action.data.res.data.userModified.userImage;
-        setCookie('token', st.token, 7);
         st.email = action.data.res.data.userModified.email;
         st.dateOfBirth = action.data.res.data.userModified.dateOfBirth;
         st.sex = action.data.res.data.userModified.sex;
         // eslint-disable-next-line no-underscore-dangle
         st.id = action.data.res.data.userModified._id;
         st.isLogin = true;
+        setCookie('token', action.data.res.data.token, 7);
+        // eslint-disable-next-line no-underscore-dangle
+        setCookie('id', action.data.res.data.userModified._id, 7);
+        setCookie('name', action.data.res.data.userModified.name, 7);
       } catch (err) {
         st.token = 'err';
       }
       return st;
     }
     case types.logOut: {
+      console.log('logout');
       const st = { ...state };
       st.username = '';
       st.token = '';
@@ -92,6 +100,9 @@ const LoginReducer = (state = initialState, action) => {
       st.image = '';
       cookie.remove('token', { path: '/' });
       cookie.remove('typePlay', { path: '/' });
+      cookie.remove('id', { path: '/' });
+      cookie.remove('name', { path: '/' });
+      cookie.remove('idPlayer1', { path: '/' });
       return st;
     }
     case types.updateUser: {

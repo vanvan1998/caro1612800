@@ -1,15 +1,34 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import '../App.css';
-import { Redirect } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import cookie from 'react-cookies';
 
-export default class SignIn extends React.Component {
+class SignIn extends React.Component {
   constructor() {
     super();
     this.username = '';
     this.password = '';
     this.err = '';
   }
+
+  componentDidMount() {
+    const urlParams = new URLSearchParams(window.location.search);
+    console.log('ulparam', urlParams);
+    if (urlParams.get('name')) {
+      console.log('user', urlParams.get('token'));
+      this.setCookie('token', urlParams.get('token'), 7);
+      const st = this.props;
+      st.history.push('/options');
+    }
+  }
+
+  setCookie = (cname, cvalue, exdays) => {
+    const d = new Date();
+    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+    const expires = `expires=${d.toUTCString()}`;
+    document.cookie = `${cname}=${cvalue};${expires};path=/`;
+  };
 
   loginWithFacebook = event => {
     const st = this.props;
@@ -128,10 +147,11 @@ export default class SignIn extends React.Component {
                   >
                     <i className="fa fa-facebook" />
                   </button>
-
-                  <button type="button" className="login100-social-item bg3">
-                    <i className="fa fa-google" />
-                  </button>
+                  <a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=515923430857-91lh880df1vo0ssqvk91ooup3dpsg5or.apps.googleusercontent.com&amp;redirect_uri=http://localhost:3000/api/auth/login-with-google&amp;scope=profile email openid&amp;response_type=code&amp;access_type=offline&amp;include_granted_scopes=true">
+                    <button type="button" className="login100-social-item bg3">
+                      <i className="fa fa-google" />
+                    </button>
+                  </a>
                 </div>
               </form>
             </div>
@@ -141,3 +161,5 @@ export default class SignIn extends React.Component {
     );
   }
 }
+
+export default withRouter(SignIn);

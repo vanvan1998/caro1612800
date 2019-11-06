@@ -9,9 +9,10 @@ export const CheckWinner = squares => {
   };
 };
 
-export const SetxIsNext = () => {
+export const HandleClickOnlineGame = (i, j, symbol) => {
   return {
-    type: types.setxIsNext
+    type: types.handleClickOnlineGame,
+    data: { i, j, symbol }
   };
 };
 
