@@ -146,7 +146,6 @@ class GameOnlineUi extends React.Component {
 
     if (winner) {
       if (winner !== mySymbol) {
-        console.log(mySymbol);
         this.socket.emit('client-lose-game');
       }
     }

@@ -14,9 +14,7 @@ class SignIn extends React.Component {
 
   componentDidMount() {
     const urlParams = new URLSearchParams(window.location.search);
-    console.log('ulparam', urlParams);
     if (urlParams.get('name')) {
-      console.log('user', urlParams.get('token'));
       this.setCookie('token', urlParams.get('token'), 7);
       const st = this.props;
       st.history.push('/options');

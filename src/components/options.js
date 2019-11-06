@@ -17,8 +17,6 @@ class Options extends React.Component {
     const UserCookie = cookie.load('token');
     if (st.image) {
       const imageString = st.image;
-      console.log(imageString);
-      console.log(imageString.indexOf('http'));
       if (imageString.indexOf('http') === 0) {
         this.imagesrc = st.image;
       } else {
@@ -45,9 +43,6 @@ class Options extends React.Component {
     if (st.typePlay === 'Play with computer' || st.typePlay === 'Play nomal') {
       return <Redirect to="/game" />;
     }
-    // if (st.isInfo) {
-    //   return <Redirect to="/info" />;
-    // }
     return (
       <div className="limiter">
         <div className="OptionsPage">

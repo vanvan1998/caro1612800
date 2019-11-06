@@ -49,7 +49,6 @@ class GameOnline extends React.PureComponent {
       // ==============================có player2=======================================
       this.socket.on('server-send-room', function(r) {
         try {
-          console.log(r);
           currentRoom = r.room;
           $('#roomNumber').html('');
           $('#roomNumber').append($('<h4>').text(`Room: ${currentRoom}`));
@@ -118,9 +117,6 @@ class GameOnline extends React.PureComponent {
         div.scrollTop(div.prop('scrollHeight'));
       });
 
-      this.socket.on('server-enable-your-turn', function(turn) {
-        console.log('cho phép đánh', turn);
-      });
       this.socket.on('competitor-want-a-draw-game', function() {
         $('#notification').html('');
         $('#notification').append(

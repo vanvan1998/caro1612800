@@ -25,7 +25,6 @@ function setCookie(cname, cvalue, exdays) {
 const LoginReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.login: {
-      console.log(action.data.res.data);
       const st = { ...state };
       st.username = action.data.username;
       st.password = action.data.password;
@@ -88,7 +87,6 @@ const LoginReducer = (state = initialState, action) => {
       return st;
     }
     case types.logOut: {
-      console.log('logout');
       const st = { ...state };
       st.username = '';
       st.token = '';
