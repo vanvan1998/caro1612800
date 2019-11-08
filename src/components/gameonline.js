@@ -77,10 +77,13 @@ class GameOnline extends React.PureComponent {
             $('#namePlayer2').html(player2.name);
             $('#turnDiv').visible();
             if (player2.image) {
-              $('#imagePlayer2').attr(
-                'src',
-                types.stringConnect + player2.image
-              );
+              let imageString = player2.image;
+              if (imageString.indexOf('http') === 0) {
+                imageString = r.imagePlayer1;
+              } else {
+                imageString = types.stringConnect + imageString;
+              }
+              $('#imagePlayer2').attr('src', imageString);
             } else {
               $('#imagePlayer2').attr(
                 'src',
