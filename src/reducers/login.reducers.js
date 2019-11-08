@@ -61,7 +61,7 @@ const LoginReducer = (state = initialState, action) => {
         st.id = action.data.res.data._id;
         // eslint-disable-next-line no-underscore-dangle
         setCookie('id', action.data.res.data._id, 7);
-        setCookie('name', action.data.res.name, 7);
+        setCookie('name', action.data.res.data.name, 7);
         st.isLogin = true;
       } catch (err) {
         st.token = 'err';
