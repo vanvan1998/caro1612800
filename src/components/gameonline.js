@@ -29,7 +29,9 @@ class GameOnline extends React.PureComponent {
     const name = cookie.load('name');
     const { typePlay } = this;
     if (id !== '' || typePlay) {
-      this.socket = io('http://localhost3000');
+      this.socket = io('https://restful1612800.herokuapp.com', {
+        transports: ['websocket']
+      });
       const sk = this.socket;
       this.socket.on('server-request-client-init-info', function() {
         const data = {
